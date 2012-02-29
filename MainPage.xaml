@@ -1,9 +1,11 @@
 ﻿<phone:PhoneApplicationPage 
     x:Class="sbbs_client_wp7.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:local="clr-namespace:sbbs_client_wp7"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,50 +16,74 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="MyItemHeaderTemplate">
+            <Grid>
+                <ContentPresenter>
+                    <TextBlock Text="{Binding}" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60" />
+                </ContentPresenter>
+            </Grid>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
  
         <!--Panorama control-->
-        <controls:Panorama Title="my application">
+        <controls:Panorama Title="虎踞龙蟠BBS">
+            <controls:Panorama.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="90" Margin="20,60,0,0" />
+                </DataTemplate>
+            </controls:Panorama.TitleTemplate>
+            
+            <!--
             <controls:Panorama.Background>
                 <ImageBrush ImageSource="PanoramaBackground.png"/>
             </controls:Panorama.Background>
+            -->
  
-            <!--Panorama item one-->
-            <controls:PanoramaItem Header="first item">
-                <!--Double line list with text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,17" Width="432" Height="78">
-                                <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+            <!-- 我的最爱 -->
+            <controls:PanoramaItem Header="我的最爱" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
+                
             </controls:PanoramaItem>
- 
-            <!--Panorama item two-->
-            <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
-            <controls:PanoramaItem Header="second item">
-                <!--Double line list with image placeholder and text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
-                                <!--Replace rectangle with image-->
-                                <Rectangle Height="100" Width="100" Fill="#FFE5001b" Margin="12,0,9,0"/>
-                                <StackPanel Width="311">                                    
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+            
+            <!-- 我的账户 -->
+            <controls:PanoramaItem Header="我的账户" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
+                <toolkit:WrapPanel>
+                    <toolkit:WrapPanel.Resources>
+                        <Style TargetType="local:Tile">
+                            <Setter Property="Margin" Value="5"/>
+                        </Style>
+                    </toolkit:WrapPanel.Resources>
+                    
+                    <local:Tile Title="热门版面"/>
+                    <local:Tile Title="我的信箱"/>
+                    <local:Tile Title="最近浏览"/>
+                    <local:Tile Title="设置"/>
+                    <local:Tile Title="退出"/>
+                </toolkit:WrapPanel>
             </controls:PanoramaItem>
+
+            <!-- 十大热帖 -->
+            <controls:PanoramaItem Header="十大热帖" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
+                <ScrollViewer>
+                    <ListBox ItemsSource="{Binding Topten}" ItemTemplate="{StaticResource TopicDataTemplate}">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </ScrollViewer>
+            </controls:PanoramaItem>
+
+            <!-- 进站图片 -->
+            <controls:PanoramaItem Header="进站图片" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
+
+            </controls:PanoramaItem>
+
         </controls:Panorama>
     </Grid>
 </phone:PhoneApplicationPage>

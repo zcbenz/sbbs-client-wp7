@@ -8,6 +8,19 @@
 
     <!--Application Resources-->
     <Application.Resources>
+        <!--话题列表Template-->
+        <DataTemplate x:Key="TopicDataTemplate">
+            <Grid Margin="0 0 0 10">
+                <Rectangle Fill="{StaticResource PhoneAccentBrush}" Width="8" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Vertical" Margin="4 0 0 0">
+                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Title}"/>
+                    <Grid>
+                        <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Author}"/>
+                        <TextBlock Margin="0 0 10 0" HorizontalAlignment="Right" Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Read}"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
