@@ -15,7 +15,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="False"
+    toolkit:TiltEffect.IsTiltEnabled="True">
     
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="MyItemHeaderTemplate">
@@ -34,7 +35,7 @@
         <controls:Panorama Title="虎踞龙蟠BBS">
             <controls:Panorama.TitleTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" FontSize="90" Margin="20,60,0,0" />
+                    <TextBlock Text="{Binding}" FontSize="90" Margin="10,60,0,0" />
                 </DataTemplate>
             </controls:Panorama.TitleTemplate>
             
@@ -43,7 +44,20 @@
                 <ImageBrush ImageSource="PanoramaBackground.png"/>
             </controls:Panorama.Background>
             -->
- 
+
+            <!-- 十大热帖 -->
+            <controls:PanoramaItem Header="十大热帖" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
+                <ScrollViewer>
+                    <ListBox ItemsSource="{Binding ToptenItems}" ItemTemplate="{StaticResource TopicDataTemplate}">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </ScrollViewer>
+            </controls:PanoramaItem>
+
             <!-- 我的最爱 -->
             <controls:PanoramaItem Header="我的最爱" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
                 
@@ -65,25 +79,6 @@
                     <local:Tile Title="退出"/>
                 </toolkit:WrapPanel>
             </controls:PanoramaItem>
-
-            <!-- 十大热帖 -->
-            <controls:PanoramaItem Header="十大热帖" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
-                <ScrollViewer>
-                    <ListBox ItemsSource="{Binding Topten}" ItemTemplate="{StaticResource TopicDataTemplate}">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
-                </ScrollViewer>
-            </controls:PanoramaItem>
-
-            <!-- 进站图片 -->
-            <controls:PanoramaItem Header="进站图片" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
-
-            </controls:PanoramaItem>
-
         </controls:Panorama>
     </Grid>
 </phone:PhoneApplicationPage>

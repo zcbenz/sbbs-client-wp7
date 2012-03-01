@@ -2,19 +2,19 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:sbbs_client_wp7">
-    
-    <local:MainViewModel.Topten>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Read="10" Read="100" Top="False" Mark="False"/>
-    </local:MainViewModel.Topten>
+
+    <local:MainViewModel.ToptenItems>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="20" Read="100" Top="False" Mark="False"/>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="13" Read="100" Top="False" Mark="False"/>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="14" Read="100" Top="False" Mark="False"/>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+    </local:MainViewModel.ToptenItems>
     
 </local:MainViewModel>

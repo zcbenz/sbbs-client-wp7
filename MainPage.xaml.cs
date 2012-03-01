@@ -20,6 +20,9 @@ namespace sbbs_client_wp7
         {
             InitializeComponent();
 
+            // Add Tilt effect for Tile
+            TiltEffect.TiltableItems.Add(typeof(Tile));
+
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);

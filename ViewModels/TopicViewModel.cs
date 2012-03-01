@@ -203,6 +203,7 @@ namespace sbbs_client_wp7
                 {
                     replies = value;
                     NotifyPropertyChanged("Replies");
+                    NotifyPropertyChanged("RepliesRead");
                 }
             }
         }
@@ -219,6 +220,7 @@ namespace sbbs_client_wp7
                 {
                     read = value;
                     NotifyPropertyChanged("Read");
+                    NotifyPropertyChanged("RepliesRead");
                 }
             }
         }

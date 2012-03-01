@@ -20,13 +20,13 @@ namespace sbbs_client_wp7
     {
         public MainViewModel()
         {
-            this.Topten = new ObservableCollection<TopicViewModel>();
+            this.ToptenItems = new ObservableCollection<TopicViewModel>();
         }
 
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
-        public ObservableCollection<TopicViewModel> Topten { get; private set; }
+        public ObservableCollection<TopicViewModel> ToptenItems { get; private set; }
 
         public bool IsDataLoaded
         {
@@ -39,6 +39,12 @@ namespace sbbs_client_wp7
         /// </summary>
         public void LoadData()
         {
+            this.ToptenItems.Add(new TopicViewModel { Title = "Test", Content = "COntent", Author = "Author", Replies = 10, Read = 20 });
+            this.ToptenItems.Add(new TopicViewModel { Title = "Test", Content = "COntent", Author = "Author", Replies = 10, Read = 20 });
+            this.ToptenItems.Add(new TopicViewModel { Title = "Test", Content = "COntent", Author = "Author", Replies = 12, Read = 20 });
+            this.ToptenItems.Add(new TopicViewModel { Title = "Test", Content = "COntent", Author = "Author", Replies = 10, Read = 20 });
+            this.ToptenItems.Add(new TopicViewModel { Title = "Test", Content = "COntent", Author = "Author", Replies = 10, Read = 20 });
+            this.ToptenItems.Add(new TopicViewModel { Title = "Test", Content = "COntent", Author = "Author", Replies = 10, Read = 20 });
 
             this.IsDataLoaded = true;
         }

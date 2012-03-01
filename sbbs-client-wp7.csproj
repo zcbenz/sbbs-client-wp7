@@ -70,6 +70,7 @@
     <Compile Include="Tile.xaml.cs">
       <DependentUpon>Tile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValueConverters\RepliesHotConverter.cs" />
     <Compile Include="ViewModels\BoardViewModel.cs" />
     <Compile Include="ViewModels\TopicViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -110,6 +111,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
