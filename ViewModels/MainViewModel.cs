@@ -21,6 +21,12 @@ namespace sbbs_client_wp7
     {
         public MainViewModel()
         {
+            // 临时设置登录
+            this.isLogin = true;
+            this.service.Token = "Zm9vbA==:==wdlloHYLkEW0n2ltyx5QKO";
+
+            // 初始化
+            CurrentBoard = new CurrentBoardViewModel();
         }
         
         // Sbbs 接口
@@ -92,6 +98,9 @@ namespace sbbs_client_wp7
                 }
             }
         }
+
+        // 当前版面
+        public CurrentBoardViewModel CurrentBoard { get; set; }
 
         // 是否已经登陆
         private bool isLogin;

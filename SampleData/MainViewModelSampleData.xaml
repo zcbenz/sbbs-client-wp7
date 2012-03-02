@@ -33,4 +33,8 @@
         <sbbs:BoardViewModel Leaf="True" EnglishName="discuss" Description="站务讨论室"/>
     </local:MainViewModel.FavoratesItems>
     
+    <local:MainViewModel.CurrentBoard>
+        <sbbs:CurrentBoardViewModel Description="C/C++语言" EnglishName="C_CPlusPlus" />
+    </local:MainViewModel.CurrentBoard>
+    
 </local:MainViewModel>

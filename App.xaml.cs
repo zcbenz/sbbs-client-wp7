@@ -19,10 +19,6 @@ namespace sbbs_client_wp7
     {
         private static MainViewModel viewModel = null;
 
-        /// <summary>
-        /// A static ViewModel used by the views to bind against.
-        /// </summary>
-        /// <returns>The MainViewModel object.</returns>
         public static MainViewModel ViewModel
         {
             get

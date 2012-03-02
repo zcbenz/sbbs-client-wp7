@@ -92,7 +92,8 @@
             <controls:PanoramaItem Header="收藏夹" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
                 <ScrollViewer>
                     <ListBox ItemsSource="{Binding FavoratesItems}" ItemTemplate="{StaticResource BoardDataTemplate}"
-                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                             SelectionChanged="Favorates_Selected">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

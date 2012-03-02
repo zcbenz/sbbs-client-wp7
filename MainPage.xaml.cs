@@ -13,6 +13,8 @@ using Microsoft.Phone.Controls;
 
 namespace sbbs_client_wp7
 {
+    using Sbbs;
+
     public partial class MainPage : PhoneApplicationPage
     {
         // Constructor
@@ -43,14 +45,30 @@ namespace sbbs_client_wp7
             }
         }
 
+        // 登录
         private void Login_Click(object sender, MouseButtonEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
         }
 
+        // 注销
         private void Logout_Click(object sender, MouseButtonEventArgs e)
         {
             App.ViewModel.IsLogin = false;
+        }
+
+        // 点击收藏夹
+        private void Favorates_Selected(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 1)
+            {
+                BoardViewModel board = e.AddedItems[0] as BoardViewModel;
+                // 收藏夹目录暂时不管
+                if (board.Leaf != true)
+                    return;
+
+                this.NavigationService.Navigate(new Uri("/BoardPage.xaml?board=" + board.EnglishName + "&description=" + board.Description, UriKind.Relative));
+            }
         }
     }
 }
