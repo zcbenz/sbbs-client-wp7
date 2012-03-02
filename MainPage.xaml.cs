@@ -26,6 +26,12 @@ namespace sbbs_client_wp7
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
+
+            // 登录后刷新收藏夹
+            App.ViewModel.LoginChanged += delegate(object sender, bool isLogin)
+            {
+                App.ViewModel.LoadFavorates();
+            };
         }
 
         // Load data for the ViewModel Items

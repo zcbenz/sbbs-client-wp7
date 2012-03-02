@@ -11,6 +11,7 @@ namespace sbbs_client_wp7.Sbbs
 {
     // 集合类型
     using TopicCollection = ObservableCollection<TopicViewModel>;
+    using BoardCollection = ObservableCollection<BoardViewModel>;
 
     // 回调函数参数
     public struct ServiceArg<T>
@@ -45,6 +46,16 @@ namespace sbbs_client_wp7.Sbbs
 
             wc.DownloadStringCompleted += DownloadedAndParse<TopicCollection, TopicsResponse>;
             wc.DownloadStringAsync(uri, new ServiceArg<TopicCollection>() { Callback = callback });
+        }
+
+        // 获取收藏夹
+        public void Favorates(Action<BoardCollection, bool, string> callback)
+        {
+            WebClient wc = new WebClient();
+            Uri uri = new Uri(apiBase + "fav/list" + apiPost + "?token=" + HttpUtility.UrlEncode(Token));
+
+            wc.DownloadStringCompleted += DownloadedAndParse<BoardCollection, BoardsResponse>;
+            wc.DownloadStringAsync(uri, new ServiceArg<BoardCollection>() { Callback = callback });
         }
 
         // 下载完成后分析JSON数据然后调用回调函数

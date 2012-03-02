@@ -14,6 +14,7 @@ namespace sbbs_client_wp7.Sbbs
     // 服务器响应一定会包含的字段
     [DataContract]
     [KnownType(typeof(TopicsResponse))]
+    [KnownType(typeof(BoardsResponse))]
     [KnownType(typeof(TokenResponse))]
     public class Response
     {
@@ -43,6 +44,26 @@ namespace sbbs_client_wp7.Sbbs
             get
             {
                 return topics;
+            }
+            private set
+            {
+            }
+        }
+    }
+
+    // 返回版面集合
+    // 符合类型： 收藏夹
+    [DataContract]
+    public class BoardsResponse : Response, IResponse<ObservableCollection<BoardViewModel>>
+    {
+        [DataMember(Name = "boards")]
+        public ObservableCollection<BoardViewModel> boards;
+
+        public ObservableCollection<BoardViewModel> Root
+        {
+            get
+            {
+                return boards;
             }
             private set
             {

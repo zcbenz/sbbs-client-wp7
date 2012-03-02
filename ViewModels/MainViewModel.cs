@@ -60,6 +60,22 @@ namespace sbbs_client_wp7
         }
 
         // 收藏夹
+        // -- 收藏夹是否载入完毕
+        private bool isFavoratesLoaded;
+        public bool IsFavoratesLoaded
+        {
+            get
+            {
+                return isFavoratesLoaded;
+            }
+            set
+            {
+                isFavoratesLoaded = value;
+                // 检查数据是否全部载入完毕
+                ComputeDataLoaded();
+            }
+        }
+        // -- 收藏夹集合
         private ObservableCollection<BoardViewModel> favoratesItems;
         public ObservableCollection<BoardViewModel> FavoratesItems
         {
@@ -77,24 +93,33 @@ namespace sbbs_client_wp7
             }
         }
 
-        // 是否登陆
+        // 是否已经登陆
+        private bool isLogin;
         public bool IsLogin
         {
             get
             {
-                return service.Token != null;
+                return isLogin;
             }
             set
             {
-                // 注销时清除Token
-                if (value == false)
+                if (isLogin != value)
                 {
-                    service.Token = null;
+                    isLogin = value;
+
+                    // 启动所有登录钩子
+                    LoginChanged(this, isLogin);
+
+                    // 注销时清除Token
+                    if (isLogin == false)
+                    {
+                        service.Token = null;
+                    }
+
+                    NotifyPropertyChanged("IsLogin");
                 }
-                NotifyPropertyChanged("IsLogin");
             }
         }
-
         // 是否正在登录中
         private bool isLogining;
         public bool IsLogining
@@ -126,6 +151,9 @@ namespace sbbs_client_wp7
                 callback(error);
             });
         }
+        // 登录钩子
+        public delegate void LoginChangedHandler(object sender, bool isLogin);
+        public event LoginChangedHandler LoginChanged;
 
         // 数据是否全部载入完毕
         private bool isDataLoaded;
@@ -147,12 +175,18 @@ namespace sbbs_client_wp7
         // 根据各项载入值计算是否全部载入
         private void ComputeDataLoaded()
         {
-            IsDataLoaded = IsToptenLoaded;
+            IsDataLoaded = IsToptenLoaded && IsFavoratesLoaded;
         }
 
         public void LoadData()
         {
-            // 载入十大
+            LoadTopten();
+            LoadFavorates();
+        }
+
+        // 载入十大
+        public void LoadTopten()
+        {
             service.Topten(delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
             {
                 IsToptenLoaded = true;
@@ -162,6 +196,27 @@ namespace sbbs_client_wp7
                 // 刷新十大
                 ToptenItems = topics;
             });
+        }
+
+        // 载入收藏夹
+        public void LoadFavorates()
+        {
+            if (IsLogin)
+            {
+                service.Favorates(delegate(ObservableCollection<BoardViewModel> boards, bool success, string error)
+                {
+                    IsFavoratesLoaded = true;
+                    if (error != null)
+                        return;
+
+                    FavoratesItems = boards;
+                });
+            }
+            else
+            {
+                IsFavoratesLoaded = true;
+                FavoratesItems = new ObservableCollection<BoardViewModel>();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
