@@ -24,7 +24,20 @@ namespace sbbs_client_wp7
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-
+            string username = Username.Text;
+            string password = Password.Password;
+            App.ViewModel.Login(username, password, delegate(string error)
+            {
+                if (error == null)
+                {
+                    App.ViewModel.IsLogin = true;
+                    this.NavigationService.GoBack();
+                }
+                else
+                {
+                    MessageBox.Show("用户名密码错误");
+                }
+            });
         }
     }
 }

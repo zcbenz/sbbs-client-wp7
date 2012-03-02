@@ -82,10 +82,15 @@ namespace sbbs_client_wp7
         {
             get
             {
-                return service.Token != "";
+                return service.Token != null;
             }
-            private set
+            set
             {
+                // 注销时清除Token
+                if (value == false)
+                {
+                    service.Token = null;
+                }
                 NotifyPropertyChanged("IsLogin");
             }
         }
@@ -98,7 +103,7 @@ namespace sbbs_client_wp7
             {
                 return isLogining;
             }
-            private set
+            set
             {
                 if (value != isLogining)
                 {
@@ -106,6 +111,20 @@ namespace sbbs_client_wp7
                     NotifyPropertyChanged("IsLogining");
                 }
             }
+        }
+        // 登录
+        public void Login(string username, string password, Action<string> callback)
+        {
+            IsLogining = true;
+            service.Login(username, password, delegate(string token, bool success, string error)
+            {
+                IsLogining = false;
+
+                if (error == null)
+                    service.Token = token;
+
+                callback(error);
+            });
         }
 
         // 数据是否全部载入完毕

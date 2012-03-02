@@ -113,8 +113,8 @@
                     
                     <local:Tile Title="热门版面"/>
                     <local:Tile Title="最近浏览"/>
-                    <local:Tile Title="登录" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
-                    <local:Tile Title="注册" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                    <local:Tile Title="登录" MouseLeftButtonUp="Login_Click" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                    <local:Tile Title="注册" MouseLeftButtonUp="Logout_Click" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
                     <local:Tile Title="我的信箱" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
                     <local:Tile Title="设置" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
                     <local:Tile Title="退出" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>

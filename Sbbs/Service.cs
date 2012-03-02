@@ -15,7 +15,7 @@ namespace sbbs_client_wp7.Sbbs
     // 回调函数参数
     public struct ServiceArg<T>
     {
-        public Action<T, bool, string> callback;
+        public Action<T, bool, string> Callback;
     }
 
     public class Service
@@ -31,10 +31,10 @@ namespace sbbs_client_wp7.Sbbs
         public void Login(string username, string password, Action<string, bool, string> callback)
         {
             WebClient wc = new WebClient();
-            Uri uri = new Uri(apiBase + "token" + apiPost);
+            Uri uri = new Uri(apiBase + "token" + apiPost + "?user=" + HttpUtility.UrlEncode(username) + "&pass=" + HttpUtility.UrlEncode(password));
 
             wc.DownloadStringCompleted += DownloadedAndParse<string, TokenResponse>;
-            wc.DownloadStringAsync(uri, new ServiceArg<string>() { callback = callback });
+            wc.DownloadStringAsync(uri, new ServiceArg<string>() { Callback = callback });
         }
 
         // 获取十大
@@ -44,7 +44,7 @@ namespace sbbs_client_wp7.Sbbs
             Uri uri = new Uri(apiBase + "hot/topten" + apiPost);
 
             wc.DownloadStringCompleted += DownloadedAndParse<TopicCollection, TopicsResponse>;
-            wc.DownloadStringAsync(uri, new ServiceArg<TopicCollection>() { callback = callback });
+            wc.DownloadStringAsync(uri, new ServiceArg<TopicCollection>() { Callback = callback });
         }
 
         // 下载完成后分析JSON数据然后调用回调函数
@@ -58,7 +58,7 @@ namespace sbbs_client_wp7.Sbbs
             // 检查网络错误
             if (e.Error != null)
             {
-                arg.callback(default(C), false, "网络连接错误");
+                arg.Callback(default(C), false, "网络连接错误");
                 return;
             }
 
@@ -68,14 +68,14 @@ namespace sbbs_client_wp7.Sbbs
                 // 转换成JSON
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(R));
                 R result = serializer.ReadObject(stream) as R;
-                if (!result.success)
+                if (result.error != null)
                 {
                     // result.error表示有错误
-                    arg.callback(default(C), false, result.error);
+                    arg.Callback(default(C), false, result.error);
                 }
                 else
                 {
-                    arg.callback(result.Root, true, null);
+                    arg.Callback(result.Root, true, null);
                 }
             }
         }

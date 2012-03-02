@@ -36,5 +36,15 @@ namespace sbbs_client_wp7
                 App.ViewModel.LoadData();
             }
         }
+
+        private void Login_Click(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+        }
+
+        private void Logout_Click(object sender, MouseButtonEventArgs e)
+        {
+            App.ViewModel.IsLogin = false;
+        }
     }
 }

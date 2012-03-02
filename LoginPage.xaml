@@ -48,13 +48,13 @@
                     <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="用户名"/>
                     <TextBox x:Name="Username" IsEnabled="{Binding IsLogining, Converter={StaticResource BoolReverseConverter}}"/>
                     <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="密码"/>
-                    <TextBox x:Name="Password" IsEnabled="{Binding IsLogining, Converter={StaticResource BoolReverseConverter}}"/>
+                    <PasswordBox x:Name="Password" IsEnabled="{Binding IsLogining, Converter={StaticResource BoolReverseConverter}}"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <ProgressBar IsIndeterminate="{Binding IsLogining}" Visibility="{Binding IsLogining, Converter={StaticResource BoolVisibleConverter}}"/>
+                        <toolkit:PerformanceProgressBar IsIndeterminate="{Binding IsLogining}" Visibility="{Binding IsLogining, Converter={StaticResource BoolVisibleConverter}}"/>
                         <Button IsEnabled="{Binding IsLogining, Converter={StaticResource BoolReverseConverter}}"
                                 Content="登录" HorizontalAlignment="Right" Grid.Column="1"
                                 Click="Login_Click"/>
