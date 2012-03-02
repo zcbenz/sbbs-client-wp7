@@ -10,13 +10,16 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:RepliesHotConverter x:Key="RepliesHotConverter" />
+        <local:LeafBrushConverter x:Key="LeafBrushConverter" />
+        <local:BoolVisibleConverter x:Key="BoolVisibleConverter" />
+        <local:BoolReverseConverter x:Key="BoolReverseConverter" />
         
         <!--话题列表Template-->
         <DataTemplate x:Key="TopicDataTemplate">
             <Grid Margin="0 0 0 10">
                 <Rectangle Fill="{StaticResource PhoneAccentBrush}" Width="8" HorizontalAlignment="Left"/>
                 <StackPanel Orientation="Vertical" Margin="4 0 0 0">
-                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Title}"/>
+                    <TextBlock Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" Text="{Binding Title}"/>
                     <Grid>
                         <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Author}"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
@@ -25,6 +28,17 @@
                             <TextBlock Margin="0" Foreground="{Binding Replies, Converter={StaticResource RepliesHotConverter}}" Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Read}"/>
                         </StackPanel>
                     </Grid>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        
+        <!--版面列表Template-->
+        <DataTemplate x:Key="BoardDataTemplate">
+            <Grid Margin="0 0 0 10">
+                <Rectangle Fill="{Binding Leaf, Converter={StaticResource LeafBrushConverter}}" Width="8" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Vertical" Margin="4 0 0 0">
+                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding EnglishName}"/>
+                    <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Description}"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>

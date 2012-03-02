@@ -1,18 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
-namespace sbbs_client_wp7
+namespace sbbs_client_wp7.Sbbs
 {
+    [DataContract(Name = "topic")]
     public class TopicViewModel : INotifyPropertyChanged
     {
         private string title;
@@ -31,6 +25,7 @@ namespace sbbs_client_wp7
         private bool top;
         private bool mark;
 
+        [DataMember(Name = "title")]
         public string Title
         {
             get
@@ -47,6 +42,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "content")]
         public string Content
         {
             get
@@ -63,6 +59,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "author")]
         public string Author
         {
             get
@@ -79,6 +76,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "board")]
         public string Board
         {
             get
@@ -95,6 +93,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "quote")]
         public string Quote
         {
             get
@@ -111,6 +110,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "quoter")]
         public string Quoter
         {
             get
@@ -127,6 +127,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "id")]
         public int Id
         {
             get
@@ -143,6 +144,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "reid")]
         public int Reid
         {
             get
@@ -159,6 +161,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "time")]
         public int Time
         {
             get
@@ -175,6 +178,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "size")]
         public int Size
         {
             get
@@ -191,6 +195,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "replies")]
         public int Replies
         {
             get
@@ -208,6 +213,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "read")]
         public int Read
         {
             get
@@ -225,6 +231,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "unread")]
         public bool Unread
         {
             get
@@ -241,6 +248,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "top")]
         public bool Top
         {
             get
@@ -257,6 +265,7 @@ namespace sbbs_client_wp7
             }
         }
 
+        [DataMember(Name = "mark")]
         public bool Mark
         {
             get

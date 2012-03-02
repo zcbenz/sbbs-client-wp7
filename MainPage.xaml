@@ -2,6 +2,7 @@
     x:Class="sbbs_client_wp7.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:local="clr-namespace:sbbs_client_wp7"
+    xmlns:sbbs="clr-namespace:sbbs_client_wp7.Sbbs"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
@@ -14,10 +15,38 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False"
+    SupportedOrientations="PortraitOrLandscape"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="{Binding IsDataLoaded, Converter={StaticResource BoolReverseConverter}}"
+    shell:SystemTray.Opacity="0.5"
     toolkit:TiltEffect.IsTiltEnabled="True">
-    
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator Text="载入中..."
+            IsVisible="{Binding IsDataLoaded, Converter={StaticResource BoolReverseConverter}}"
+            IsIndeterminate="{Binding IsDataLoaded, Converter={StaticResource BoolReverseConverter}}"/>
+    </shell:SystemTray.ProgressIndicator>
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="MyItemHeaderTemplate">
             <Grid>
@@ -48,7 +77,8 @@
             <!-- 十大热帖 -->
             <controls:PanoramaItem Header="十大热帖" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
                 <ScrollViewer>
-                    <ListBox ItemsSource="{Binding ToptenItems}" ItemTemplate="{StaticResource TopicDataTemplate}">
+                    <ListBox ItemsSource="{Binding ToptenItems}" ItemTemplate="{StaticResource TopicDataTemplate}"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -59,12 +89,21 @@
             </controls:PanoramaItem>
 
             <!-- 我的最爱 -->
-            <controls:PanoramaItem Header="我的最爱" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
-                
+            <controls:PanoramaItem Header="收藏夹" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
+                <ScrollViewer>
+                    <ListBox ItemsSource="{Binding FavoratesItems}" ItemTemplate="{StaticResource BoardDataTemplate}"
+                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </ScrollViewer>
             </controls:PanoramaItem>
             
             <!-- 我的账户 -->
-            <controls:PanoramaItem Header="我的账户" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
+            <controls:PanoramaItem Orientation="Horizontal" Width="565" Header="我的账户" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
                 <toolkit:WrapPanel>
                     <toolkit:WrapPanel.Resources>
                         <Style TargetType="local:Tile">
@@ -73,10 +112,13 @@
                     </toolkit:WrapPanel.Resources>
                     
                     <local:Tile Title="热门版面"/>
-                    <local:Tile Title="我的信箱"/>
                     <local:Tile Title="最近浏览"/>
-                    <local:Tile Title="设置"/>
-                    <local:Tile Title="退出"/>
+                    <local:Tile Title="登录" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                    <local:Tile Title="注册" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                    <local:Tile Title="我的信箱" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
+                    <local:Tile Title="设置" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
+                    <local:Tile Title="退出" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
+                    <local:Tile Title="关于"/>
                 </toolkit:WrapPanel>
             </controls:PanoramaItem>
         </controls:Panorama>

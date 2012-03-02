@@ -1,20 +1,36 @@
 ﻿<local:MainViewModel 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:sbbs_client_wp7">
+    xmlns:local="clr-namespace:sbbs_client_wp7"
+    xmlns:sbbs="clr-namespace:sbbs_client_wp7.Sbbs"
+    IsDataLoaded="True"
+    IsLogin="False"
+    IsLogining="False">
 
     <local:MainViewModel.ToptenItems>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="20" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="13" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="14" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
-        <local:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="20" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="13" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="14" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
     </local:MainViewModel.ToptenItems>
+
+    <local:MainViewModel.FavoratesItems>
+        <sbbs:BoardViewModel Leaf="False" EnglishName="收藏夹的一个目录" Description="[目录]"/>
+        <sbbs:BoardViewModel Leaf="True" EnglishName="discuss" Description="站务讨论室"/>
+        <sbbs:BoardViewModel Leaf="True" EnglishName="discuss" Description="站务讨论室"/>
+        <sbbs:BoardViewModel Leaf="True" EnglishName="discuss" Description="站务讨论室"/>
+        <sbbs:BoardViewModel Leaf="True" EnglishName="discuss" Description="站务讨论室"/>
+        <sbbs:BoardViewModel Leaf="True" EnglishName="discuss" Description="站务讨论室"/>
+        <sbbs:BoardViewModel Leaf="True" EnglishName="discuss" Description="站务讨论室"/>
+        <sbbs:BoardViewModel Leaf="True" EnglishName="discuss" Description="站务讨论室"/>
+        <sbbs:BoardViewModel Leaf="True" EnglishName="discuss" Description="站务讨论室"/>
+    </local:MainViewModel.FavoratesItems>
     
 </local:MainViewModel>
