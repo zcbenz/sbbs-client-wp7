@@ -59,6 +59,20 @@ namespace sbbs_client_wp7
             App.ViewModel.IsLogin = false;
         }
 
+        // 刷新十大
+        private void RefreshTopten_Click(object sender, MouseButtonEventArgs e)
+        {
+            App.ViewModel.IsToptenLoaded = false;
+            LoadTopten();
+        }
+
+        // 刷新收藏夹
+        private void RefreshFavorates_Click(object sender, MouseButtonEventArgs e)
+        {
+            App.ViewModel.IsFavoratesLoaded = false;
+            LoadFavorates();
+        }
+
         // 点击收藏夹
         private void Favorates_Selected(object sender, SelectionChangedEventArgs e)
         {

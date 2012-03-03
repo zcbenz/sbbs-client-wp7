@@ -74,6 +74,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MetroInMotion\LinqToVisualTree.cs" />
+    <Compile Include="MetroInMotion\MetroInMotion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sbbs\Response.cs" />
     <Compile Include="Sbbs\Service.cs" />
@@ -145,6 +147,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="PanoramaBackground.png" />
+    <Content Include="Images\circle.png" />
     <Content Include="Images\new.png" />
     <Content Include="Images\refresh.png" />
     <Content Include="SplashScreenImage.jpg" />
