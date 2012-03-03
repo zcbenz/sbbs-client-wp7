@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{df35a3b9-d6fc-475e-b676-9c4143259657}" Title="sbbs_client_wp7" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="sbbs_client_wp7 author" Description="Sample description" Publisher="sbbs_client_wp7">
+  <App xmlns="" ProductID="{df35a3b9-d6fc-475e-b676-9c4143259657}" Title="虎踞龙蟠BBS" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="赵成" Description="虎踞龙蟠BBS官方客户端" Publisher="小型笨蛋">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES"/>

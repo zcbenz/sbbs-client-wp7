@@ -67,7 +67,7 @@
                         </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>
-                <Button Content="载入更多"/>
+                <Button x:Name="LoadMore" Content="载入更多" Click="LoadMore_Click"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

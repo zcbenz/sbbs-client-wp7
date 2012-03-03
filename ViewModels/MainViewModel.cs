@@ -52,7 +52,7 @@ namespace sbbs_client_wp7
             {
                 return toptenItems;
             }
-            private set
+            set
             {
                 if (value != toptenItems)
                 {
@@ -86,7 +86,7 @@ namespace sbbs_client_wp7
             {
                 return favoratesItems;
             }
-            private set
+            set
             {
                 if (value != favoratesItems)
                 {
@@ -183,48 +183,7 @@ namespace sbbs_client_wp7
         {
             IsDataLoaded = IsToptenLoaded && IsFavoratesLoaded;
         }
-
-        public void LoadData()
-        {
-            LoadTopten();
-            LoadFavorates();
-        }
-
-        // 载入十大
-        public void LoadTopten()
-        {
-            App.Service.Topten(delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
-            {
-                IsToptenLoaded = true;
-                if (error != null)
-                    return;
-
-                // 刷新十大
-                ToptenItems = topics;
-            });
-        }
-
-        // 载入收藏夹
-        public void LoadFavorates()
-        {
-            if (IsLogin)
-            {
-                App.Service.Favorates(delegate(ObservableCollection<BoardViewModel> boards, bool success, string error)
-                {
-                    IsFavoratesLoaded = true;
-                    if (error != null)
-                        return;
-
-                    FavoratesItems = boards;
-                });
-            }
-            else
-            {
-                IsFavoratesLoaded = true;
-                FavoratesItems = new ObservableCollection<BoardViewModel>();
-            }
-        }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {

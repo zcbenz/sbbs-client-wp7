@@ -14,6 +14,7 @@ using Microsoft.Phone.Controls;
 namespace sbbs_client_wp7
 {
     using Sbbs;
+    using System.Collections.ObjectModel;
 
     public partial class MainPage : PhoneApplicationPage
     {
@@ -32,7 +33,7 @@ namespace sbbs_client_wp7
             // 登录后刷新收藏夹
             App.ViewModel.LoginChanged += delegate(object sender, bool isLogin)
             {
-                App.ViewModel.LoadFavorates();
+                LoadFavorates();
             };
         }
 
@@ -41,7 +42,8 @@ namespace sbbs_client_wp7
         {
             if (!App.ViewModel.IsDataLoaded)
             {
-                App.ViewModel.LoadData();
+                LoadTopten();
+                LoadFavorates();
             }
         }
 
@@ -62,6 +64,9 @@ namespace sbbs_client_wp7
         {
             if (e.AddedItems.Count == 1)
             {
+                // 清除选择，否则同样的项目无法点击第二次
+                (sender as ListBox).SelectedIndex = -1;
+
                 BoardViewModel board = e.AddedItems[0] as BoardViewModel;
                 // 收藏夹目录暂时不管
                 if (board.Leaf != true)
@@ -69,6 +74,42 @@ namespace sbbs_client_wp7
 
                 this.NavigationService.Navigate(new Uri("/BoardPage.xaml?board=" + board.EnglishName + "&description=" + board.Description, UriKind.Relative));
             }
+        }
+
+        // 载入收藏夹
+        private void LoadFavorates()
+        {
+            // 登录时载入收藏夹，未登陆时清空
+            if (App.ViewModel.IsLogin)
+            {
+                App.Service.Favorates(delegate(ObservableCollection<BoardViewModel> boards, bool success, string error)
+                {
+                    App.ViewModel.IsFavoratesLoaded = true;
+                    if (error != null)
+                        return;
+
+                    App.ViewModel.FavoratesItems = boards;
+                });
+            }
+            else
+            {
+                App.ViewModel.IsFavoratesLoaded = true;
+                App.ViewModel.FavoratesItems = null;
+            }
+        }
+
+        // 载入十大
+        public void LoadTopten()
+        {
+            App.Service.Topten(delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
+            {
+                App.ViewModel.IsToptenLoaded = true;
+                if (error != null)
+                    return;
+
+                // 刷新十大
+                App.ViewModel.ToptenItems = topics;
+            });
         }
     }
 }
