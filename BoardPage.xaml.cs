@@ -40,28 +40,20 @@ namespace sbbs_client_wp7
                     App.ViewModel.CurrentBoard.EnglishName = board;
                     App.ViewModel.CurrentBoard.Description = this.NavigationContext.QueryString["description"];
 
-                    LoadMore.IsEnabled = false;
-                    App.ViewModel.CurrentBoard.IsLoaded = false;
-
                     // 清空已有内容
                     if (App.ViewModel.CurrentBoard.Topics != null)
                         App.ViewModel.CurrentBoard.Topics.Clear();
 
-                    // 重新加载
-                    App.Service.Board(board, currentPage * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
-                    {
-                        // 判断后面是否还有内容
-                        if (error == null && topics.Count < pageSize)
-                            LoadMore.IsEnabled = false;
-                        else
-                            LoadMore.IsEnabled = true;
-
-                        App.ViewModel.CurrentBoard.IsLoaded = true;
-                        if (error == null)
-                            App.ViewModel.CurrentBoard.Topics = topics;
-                    });
+                    currentPage = 0;
+                    LoadTopics();
                 }
             }
+        }
+
+        private void Refresh_Click(object sender, EventArgs e)
+        {
+            currentPage = 0;
+            LoadTopics();
         }
 
         private void LoadMore_Click(object sender, RoutedEventArgs e)
@@ -104,5 +96,24 @@ namespace sbbs_client_wp7
             }
         }
 
+        private void LoadTopics()
+        {
+            LoadMore.IsEnabled = false;
+            App.ViewModel.CurrentBoard.IsLoaded = false;
+
+            // 重新加载
+            App.Service.Board(App.ViewModel.CurrentBoard.EnglishName, currentPage * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
+            {
+                // 判断后面是否还有内容
+                if (error == null && topics.Count < pageSize)
+                    LoadMore.IsEnabled = false;
+                else
+                    LoadMore.IsEnabled = true;
+
+                App.ViewModel.CurrentBoard.IsLoaded = true;
+                if (error == null)
+                    App.ViewModel.CurrentBoard.Topics = topics;
+            });
+        }
     }
 }

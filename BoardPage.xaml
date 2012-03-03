@@ -77,7 +77,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
             <shell:ApplicationBarIconButton IconUri="/Images/new.png" Text="发帖"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/refresh.png" Text="刷新"/>
+            <shell:ApplicationBarIconButton Click="Refresh_Click" IconUri="/Images/refresh.png" Text="刷新"/>
             <!--<shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
                 <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
