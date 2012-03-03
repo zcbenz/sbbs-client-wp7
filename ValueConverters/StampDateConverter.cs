@@ -24,9 +24,9 @@ namespace sbbs_client_wp7
             if (date.Year == now.Year && date.Month == now.Month && date.Day == now.Day)
                 return date.ToString("HH:mm", culture);
             else if (date.Year == now.Year)
-                return date.ToString("m HH:mm", culture);
+                return date.ToString("MMM d HH:mm", culture);
             else
-                return date.ToString("y HH:mm", culture);
+                return date.ToString("y MMM d", culture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
