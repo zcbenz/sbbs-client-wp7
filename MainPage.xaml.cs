@@ -88,6 +88,14 @@ namespace sbbs_client_wp7
                     if (error != null)
                         return;
 
+                    // 对目录版面进行处理
+                    foreach (BoardViewModel board in boards)
+                    {
+                        if (!board.Leaf) {
+                            board.EnglishName = board.Description;
+                            board.Description = "[目录]";
+                        }
+                    }
                     App.ViewModel.FavoratesItems = boards;
                 });
             }

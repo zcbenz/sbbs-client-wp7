@@ -45,9 +45,6 @@ namespace sbbs_client_wp7.Sbbs
             {
                 return topics;
             }
-            private set
-            {
-            }
         }
     }
 
@@ -64,9 +61,6 @@ namespace sbbs_client_wp7.Sbbs
             get
             {
                 return boards;
-            }
-            private set
-            {
             }
         }
     }
@@ -90,7 +84,6 @@ namespace sbbs_client_wp7.Sbbs
             {
                 return token;
             }
-            private set { }
         }
     }
 }
