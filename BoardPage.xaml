@@ -14,6 +14,7 @@
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     d:DataContext="{d:DesignData SampleData/CurrentBoardViewModelSampleData.xaml}"
     shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="{Binding IsLoaded, Converter={StaticResource LoadedOpacityConerter}}"
     toolkit:TiltEffect.IsTiltEnabled="True">
 
     <shell:SystemTray.ProgressIndicator>

@@ -14,6 +14,7 @@
         <local:BoolVisibleConverter x:Key="BoolVisibleConverter" />
         <local:BoolReverseConverter x:Key="BoolReverseConverter" />
         <local:StampDateConverter x:Key="StampDateConverter" />
+        <local:LoadedOpacityConerter x:Key="LoadedOpacityConerter" />
 
         <!--RichTextBlock默认样式-->
         <Style TargetType="RichTextBox">

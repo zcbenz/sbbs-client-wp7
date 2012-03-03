@@ -13,20 +13,11 @@ using System.Globalization;
 
 namespace sbbs_client_wp7
 {
-    public class StampDateConverter : IValueConverter
+    public class LoadedOpacityConerter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTime date = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            date = date.AddSeconds((int)value).ToLocalTime();
-            DateTime now = new DateTime();
-
-            if (date.Year == now.Year && date.Month == now.Month && date.Day == now.Day)
-                return date.ToString("HH:mm", culture);
-            else if (date.Year == now.Year)
-                return date.ToString("MM月d日 HH:mm", culture);
-            else
-                return date.ToString("yyyy MM月d日", culture);
+            return (bool)value ? 0 : 0.5;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

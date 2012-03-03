@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="ValueConverters\BoardValueConverter.cs" />
     <Compile Include="ValueConverters\BoolConverter.cs" />
+    <Compile Include="ValueConverters\LoadedOpacityConverter.cs" />
     <Compile Include="ValueConverters\RepliesHotConverter.cs" />
     <Compile Include="Sbbs\BoardViewModel.cs" />
     <Compile Include="Sbbs\TopicViewModel.cs" />

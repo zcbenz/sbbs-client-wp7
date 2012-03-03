@@ -13,6 +13,7 @@
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="{Binding IsLoaded, Converter={StaticResource LoadedOpacityConerter}}"
     d:DataContext="{d:DesignData SampleData/CurrentTopicViewModelSampleData.xaml}">
 
     <shell:SystemTray.ProgressIndicator>
