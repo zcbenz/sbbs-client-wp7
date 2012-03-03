@@ -24,18 +24,26 @@ namespace sbbs_client_wp7
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            string username = Username.Text;
-            string password = Password.Password;
-            App.ViewModel.Login(username, password, delegate(string error)
+            App.ViewModel.IsLogining = true;
+            App.Service.Login(Username.Text, Password.Password, delegate(string token, bool success, string error)
             {
+                App.ViewModel.IsLogining = false;
                 if (error == null)
                 {
+                    // 保存获得的Token
+                    App.Service.Token = token;
+                    LocalCache.Set<string>("Token", token);
+
                     App.ViewModel.IsLogin = true;
                     this.NavigationService.GoBack();
                 }
-                else
+                else if (!success)
                 {
                     MessageBox.Show("用户名密码错误");
+                }
+                else
+                {
+                    MessageBox.Show("网络错误");
                 }
             });
         }

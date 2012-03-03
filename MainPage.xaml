@@ -48,105 +48,65 @@
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
 
-    <phone:PhoneApplicationPage.Resources>
-        <DataTemplate x:Key="MyItemHeaderTemplate">
-            <Grid>
-                <ContentPresenter>
-                    <TextBlock Text="{Binding}" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60" />
-                </ContentPresenter>
-            </Grid>
-        </DataTemplate>
-
-        <Style x:Key ="SimpleButtonStyle" TargetType="Button">
-            <Setter Property ="toolkit:TiltEffect.IsTiltEnabled" Value="True"/>
-            <Setter Property ="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <ContentControl x:Name="ContentContainer"
-                                        Content="{ TemplateBinding Content}"
-                                        ContentTemplate="{ TemplateBinding ContentTemplate}"
-                                        HorizontalContentAlignment =
-                                        "{TemplateBinding HorizontalContentAlignment }"
-                                        VerticalContentAlignment=
-                                        "{TemplateBinding VerticalContentAlignment}"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter >
-        </Style>
-    </phone:PhoneApplicationPage.Resources>
-
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
- 
-        <!--Panorama control-->
-        <controls:Panorama Title="虎踞龙蟠BBS">
-            <controls:Panorama.TitleTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}" FontSize="90" Margin="10,60,0,0" />
-                </DataTemplate>
-            </controls:Panorama.TitleTemplate>
+    <!--Panorama control-->
+    <controls:Panorama Title="虎踞龙蟠BBS" CacheMode="BitmapCache">
+        <controls:Panorama.TitleTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding}" FontSize="90" Margin="10,60,0,0" />
+            </DataTemplate>
+        </controls:Panorama.TitleTemplate>
             
-            <!--
-            <controls:Panorama.Background>
-                <ImageBrush ImageSource="PanoramaBackground.png"/>
-            </controls:Panorama.Background>
-            -->
+        <!-- 十大热帖 -->
+        <controls:PanoramaItem>
+            <controls:PanoramaItem.Header>
+                <TextBlock motion:MetroInMotion.Tilt="6" MouseLeftButtonUp="RefreshTopten_Click" Text="十大热帖" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
+            </controls:PanoramaItem.Header>
+            <ListBox ItemsSource="{Binding ToptenItems}" ItemTemplate="{StaticResource TopicDataTemplate}"
+                     SelectionChanged="Topten_Selected">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </controls:PanoramaItem>
 
-            <!-- 十大热帖 -->
-            <controls:PanoramaItem>
-                <controls:PanoramaItem.Header>
-                    <TextBlock MouseLeftButtonUp="RefreshTopten_Click" motion:MetroInMotion.Tilt="6" Text="十大热帖" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
-                </controls:PanoramaItem.Header>
-                <ScrollViewer>
-                    <ListBox ItemsSource="{Binding ToptenItems}" ItemTemplate="{StaticResource TopicDataTemplate}"
-                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                             SelectionChanged="Topten_Selected">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
-                </ScrollViewer>
-            </controls:PanoramaItem>
-
-            <!-- 我的最爱 -->
-            <controls:PanoramaItem>
-                <controls:PanoramaItem.Header>
-                    <TextBlock MouseLeftButtonUp="RefreshFavorates_Click" motion:MetroInMotion.Tilt="6" Text="收藏夹" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
-                </controls:PanoramaItem.Header>
-                <ScrollViewer>
-                    <ListBox ItemsSource="{Binding FavoratesItems}" ItemTemplate="{StaticResource BoardDataTemplate}"
-                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                             SelectionChanged="Favorates_Selected">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
-                </ScrollViewer>
-            </controls:PanoramaItem>
+        <!-- 我的最爱 -->
+        <controls:PanoramaItem>
+            <controls:PanoramaItem.Header>
+                <TextBlock motion:MetroInMotion.Tilt="6" MouseLeftButtonUp="RefreshFavorates_Click" Text="收藏夹" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
+            </controls:PanoramaItem.Header>
+            <ListBox ItemsSource="{Binding FavoratesItems}" ItemTemplate="{StaticResource BoardDataTemplate}"
+                        SelectionChanged="Favorates_Selected"
+                        CacheMode="BitmapCache">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </controls:PanoramaItem>
             
-            <!-- 我的账户 -->
-            <controls:PanoramaItem Orientation="Horizontal" Width="565" Header="我的账户" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
-                <toolkit:WrapPanel>
-                    <toolkit:WrapPanel.Resources>
-                        <Style TargetType="local:Tile">
-                            <Setter Property="Margin" Value="5"/>
-                        </Style>
-                    </toolkit:WrapPanel.Resources>
+        <!-- 我的账户 -->
+        <controls:PanoramaItem Orientation="Horizontal" Width="565">
+            <controls:PanoramaItem.Header>
+                <TextBlock Text="我的账户" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
+            </controls:PanoramaItem.Header>
+            <toolkit:WrapPanel>
+                <toolkit:WrapPanel.Resources>
+                    <Style TargetType="local:Tile">
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+                </toolkit:WrapPanel.Resources>
                     
-                    <local:Tile Title="热门版面"/>
-                    <local:Tile Title="最近浏览"/>
-                    <local:Tile Title="登录" MouseLeftButtonUp="Login_Click" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
-                    <local:Tile Title="注册" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
-                    <local:Tile Title="我的信箱" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
-                    <local:Tile Title="设置" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
-                    <local:Tile Title="退出" MouseLeftButtonUp="Logout_Click" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
-                    <local:Tile Title="关于"/>
-                </toolkit:WrapPanel>
-            </controls:PanoramaItem>
-        </controls:Panorama>
-    </Grid>
+                <local:Tile Title="热门版面"/>
+                <local:Tile Title="最近浏览"/>
+                <local:Tile Title="登录" MouseLeftButtonUp="Login_Click" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                <local:Tile Title="注册" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                <local:Tile Title="我的信箱" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
+                <local:Tile Title="设置" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
+                <local:Tile Title="关于"/>
+            </toolkit:WrapPanel>
+        </controls:PanoramaItem>
+    </controls:Panorama>
 </phone:PhoneApplicationPage>

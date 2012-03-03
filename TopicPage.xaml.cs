@@ -81,8 +81,11 @@ namespace sbbs_client_wp7
                     // 重新加载
                     App.Service.Topic(board, id, currentPage * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
                     {
-                        // 还原加载按钮
-                        LoadMore.IsEnabled = true;
+                        // 判断后面是否还有内容
+                        if (error == null && topics.Count < pageSize)
+                            LoadMore.IsEnabled = false;
+                        else
+                            LoadMore.IsEnabled = true;
 
                         App.ViewModel.CurrentTopic.IsLoaded = true;
                         if (error == null)

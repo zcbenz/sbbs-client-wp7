@@ -52,8 +52,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="BoardName" Text="{Binding EnglishName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="BoardDescription" Text="{Binding Description}" Margin="9,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+            <TextBlock Text="{Binding Description}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding EnglishName}" Margin="9,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->

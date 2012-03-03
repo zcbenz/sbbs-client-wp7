@@ -25,11 +25,6 @@ namespace sbbs_client_wp7
             InitializeComponent();
 
             DataContext = App.ViewModel.CurrentBoard;
-            this.Loaded += new RoutedEventHandler(Page_Loaded);
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -55,8 +50,11 @@ namespace sbbs_client_wp7
                     // 重新加载
                     App.Service.Board(board, currentPage * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
                     {
-                        // 还原加载按钮
-                        LoadMore.IsEnabled = true;
+                        // 判断后面是否还有内容
+                        if (error == null && topics.Count < pageSize)
+                            LoadMore.IsEnabled = false;
+                        else
+                            LoadMore.IsEnabled = true;
 
                         App.ViewModel.CurrentBoard.IsLoaded = true;
                         if (error == null)

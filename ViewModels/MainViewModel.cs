@@ -21,9 +21,8 @@ namespace sbbs_client_wp7
     {
         public MainViewModel()
         {
-            // 临时设置登录
-            this.isLogin = true;
-            App.Service.Token = "Zm9vbA==:==wdlloHYLkEW0n2ltyx5QKO";
+            // 载入保存的设置
+            App.Service.Token = LocalCache.Get<string>("Token");
 
             // 初始化
             CurrentBoard = new CurrentBoardViewModel();
@@ -103,30 +102,22 @@ namespace sbbs_client_wp7
         public CurrentTopicViewModel CurrentTopic { get; set; }
 
         // 是否已经登陆
-        private bool isLogin;
         public bool IsLogin
         {
             get
             {
-                return isLogin;
+                return App.Service.Token != null && App.Service.Token != "";
             }
             set
             {
-                if (isLogin != value)
-                {
-                    isLogin = value;
+                // 启动所有登录钩子
+                LoginChanged(this, value);
 
-                    // 启动所有登录钩子
-                    LoginChanged(this, isLogin);
+                // 注销时清除Token
+                if (value == false)
+                    App.Service.Token = null;
 
-                    // 注销时清除Token
-                    if (isLogin == false)
-                    {
-                        App.Service.Token = null;
-                    }
-
-                    NotifyPropertyChanged("IsLogin");
-                }
+                NotifyPropertyChanged("IsLogin");
             }
         }
         // 是否正在登录中
@@ -145,20 +136,6 @@ namespace sbbs_client_wp7
                     NotifyPropertyChanged("IsLogining");
                 }
             }
-        }
-        // 登录
-        public void Login(string username, string password, Action<string> callback)
-        {
-            IsLogining = true;
-            App.Service.Login(username, password, delegate(string token, bool success, string error)
-            {
-                IsLogining = false;
-
-                if (error == null)
-                    App.Service.Token = token;
-
-                callback(error);
-            });
         }
         // 登录钩子
         public delegate void LoginChangedHandler(object sender, bool isLogin);

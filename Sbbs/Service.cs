@@ -102,7 +102,7 @@ namespace sbbs_client_wp7.Sbbs
                 if (result.error != null)
                 {
                     // result.error表示有错误
-                    arg.Callback(default(C), false, result.error);
+                    arg.Callback(default(C), true, result.error);
                 }
                 else
                 {

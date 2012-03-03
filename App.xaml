@@ -49,7 +49,7 @@
             <Grid Margin="0 0 0 10">
                 <Rectangle Fill="{StaticResource PhoneAccentBrush}" Width="8" HorizontalAlignment="Left"/>
                 <StackPanel Orientation="Vertical" Margin="4 0 0 0">
-                    <TextBlock Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" Text="{Binding Title}"/>
+                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap" Text="{Binding Title}"/>
                     <Grid>
                         <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Author}"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
@@ -69,12 +69,11 @@
                     <TextBlock Style="{StaticResource PhoneTextAccentStyle}" Text="{Binding Author}"/>
                     <TextBlock HorizontalAlignment="Right" Text="{Binding Time, Converter={StaticResource StampDateConverter}}"/>
                 </Grid>
-                <RichTextBox Margin="-12 0 0 0">
+                <RichTextBox Margin="-12 0 0 8">
                     <Paragraph>
                         <Run Text="{Binding Content}"/>
                     </Paragraph>
                 </RichTextBox>
-                <Rectangle Margin="0 2 0 8" HorizontalAlignment="Stretch" Height="1" Fill="{StaticResource PhoneForegroundBrush}" />
             </StackPanel>
         </DataTemplate>
         

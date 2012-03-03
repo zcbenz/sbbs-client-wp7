@@ -56,7 +56,9 @@ namespace sbbs_client_wp7
         // 注销
         private void Logout_Click(object sender, MouseButtonEventArgs e)
         {
-            App.ViewModel.IsLogin = false;
+            MessageBoxResult result = MessageBox.Show("真的要注销吗？", "注销", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+                App.ViewModel.IsLogin = false;
         }
 
         // 刷新十大
@@ -78,15 +80,15 @@ namespace sbbs_client_wp7
         {
             if (e.AddedItems.Count == 1)
             {
-                // 清除选择，否则同样的项目无法点击第二次
-                (sender as ListBox).SelectedIndex = -1;
-
                 BoardViewModel board = e.AddedItems[0] as BoardViewModel;
                 // 收藏夹目录暂时不管
                 if (board.Leaf != true)
                     return;
 
                 this.NavigationService.Navigate(new Uri("/BoardPage.xaml?board=" + board.EnglishName + "&description=" + board.Description, UriKind.Relative));
+
+                // 清除选择，否则同样的项目无法点击第二次
+                (sender as ListBox).SelectedIndex = -1;
             }
         }
 
@@ -95,13 +97,13 @@ namespace sbbs_client_wp7
         {
             if (e.AddedItems.Count == 1)
             {
-                // 清除选择，否则同样的项目无法点击第二次
-                (sender as ListBox).SelectedIndex = -1;
-
                 TopicViewModel topic = e.AddedItems[0] as TopicViewModel;
 
                 this.NavigationService.Navigate(
                     new Uri("/TopicPage.xaml?board=" + topic.Board + "&id=" + topic.Id + "&title=" + HttpUtility.UrlEncode(topic.Title), UriKind.Relative));
+
+                // 清除选择，否则同样的项目无法点击第二次
+                (sender as ListBox).SelectedIndex = -1;
             }
         }
 

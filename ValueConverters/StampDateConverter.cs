@@ -22,11 +22,11 @@ namespace sbbs_client_wp7
             DateTime now = new DateTime();
 
             if (date.Year == now.Year && date.Month == now.Month && date.Day == now.Day)
-                return date.ToString("t", culture);
+                return date.ToString("HH:mm", culture);
             else if (date.Year == now.Year)
-                return date.ToString("m t", culture);
+                return date.ToString("m HH:mm", culture);
             else
-                return date.ToString("y t", culture);
+                return date.ToString("y HH:mm", culture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
