@@ -12,9 +12,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Collections.ObjectModel;
 
 namespace sbbs_client_wp7
 {
+    using Sbbs;
+
     public partial class App : Application
     {
         private static MainViewModel viewModel = null;
@@ -89,6 +92,9 @@ namespace sbbs_client_wp7
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            // 载入上一次的数据状态
+            ViewModel.FavoratesItems = LocalCache.Get<ObservableCollection<BoardViewModel>>("Favorates");
+            ViewModel.ToptenItems = LocalCache.Get<ObservableCollection<TopicViewModel>>("Topten");
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -108,6 +114,8 @@ namespace sbbs_client_wp7
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", ViewModel.FavoratesItems);
+            LocalCache.Set<ObservableCollection<TopicViewModel>>("Topten", ViewModel.ToptenItems);
         }
 
         // Code to execute if a navigation fails
