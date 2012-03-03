@@ -13,7 +13,14 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     d:DataContext="{d:DesignData SampleData/CurrentBoardViewModelSampleData.xaml}"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    toolkit:TiltEffect.IsTiltEnabled="True">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator Text="载入中..."
+            IsVisible="{Binding IsLoaded, Converter={StaticResource BoolReverseConverter}}"
+            IsIndeterminate="{Binding IsLoaded, Converter={StaticResource BoolReverseConverter}}"/>
+    </shell:SystemTray.ProgressIndicator>
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -50,13 +57,25 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
+        <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <ListBox ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource TopicDataTemplate}"
+                            ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                <Button Content="载入更多"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
             <shell:ApplicationBarIconButton IconUri="/Images/new.png" Text="发帖"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/refresh.png" Text="Button 2"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/refresh.png" Text="刷新"/>
             <!--<shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
                 <shell:ApplicationBarMenuItem Text="MenuItem 2"/>

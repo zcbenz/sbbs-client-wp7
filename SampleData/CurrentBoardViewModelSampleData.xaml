@@ -4,4 +4,20 @@
     xmlns:local="clr-namespace:sbbs_client_wp7"
     xmlns:sbbs="clr-namespace:sbbs_client_wp7.Sbbs"
     Description="C/C++语言"
-    EnglishName="C_CPlusPlus"/>
+    EnglishName="C_CPlusPlus">
+    
+    <local:CurrentBoardViewModel.Topics>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="20" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="13" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="14" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicViewModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+    </local:CurrentBoardViewModel.Topics>
+    
+</local:CurrentBoardViewModel>

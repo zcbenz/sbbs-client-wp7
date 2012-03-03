@@ -31,6 +31,18 @@ namespace sbbs_client_wp7
             }
         }
 
+        private static Sbbs.Service service = null;
+        public static Sbbs.Service Service
+        {
+            get
+            {
+                if (service == null)
+                    service = new Sbbs.Service();
+
+                return service;
+            }
+        }
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>

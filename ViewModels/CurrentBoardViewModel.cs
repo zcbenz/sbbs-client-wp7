@@ -16,7 +16,8 @@ namespace sbbs_client_wp7
     {
         private string name;
         private string description;
-        private ObservableCollection<BoardViewModel> topics;
+        private bool isLoaded;
+        private ObservableCollection<TopicViewModel> topics;
 
         public string EnglishName
         {
@@ -50,7 +51,7 @@ namespace sbbs_client_wp7
             }
         }
 
-        public ObservableCollection<BoardViewModel> Topics
+        public ObservableCollection<TopicViewModel> Topics
         {
             get
             {
@@ -62,6 +63,22 @@ namespace sbbs_client_wp7
                 {
                     topics = value;
                     NotifyPropertyChanged("Topics");
+                }
+            }
+        }
+
+        public bool IsLoaded
+        {
+            get
+            {
+                return isLoaded;
+            }
+            set
+            {
+                if (isLoaded != value)
+                {
+                    isLoaded = value;
+                    NotifyPropertyChanged("IsLoaded");
                 }
             }
         }

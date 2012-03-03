@@ -23,15 +23,12 @@ namespace sbbs_client_wp7
         {
             // 临时设置登录
             this.isLogin = true;
-            this.service.Token = "Zm9vbA==:==wdlloHYLkEW0n2ltyx5QKO";
+            App.Service.Token = "Zm9vbA==:==wdlloHYLkEW0n2ltyx5QKO";
 
             // 初始化
             CurrentBoard = new CurrentBoardViewModel();
         }
         
-        // Sbbs 接口
-        private Sbbs.Service service = new Sbbs.Service();
-
         // 十大热帖
         // -- 热帖是否载入完毕
         private bool isToptenLoaded;
@@ -122,7 +119,7 @@ namespace sbbs_client_wp7
                     // 注销时清除Token
                     if (isLogin == false)
                     {
-                        service.Token = null;
+                        App.Service.Token = null;
                     }
 
                     NotifyPropertyChanged("IsLogin");
@@ -150,12 +147,12 @@ namespace sbbs_client_wp7
         public void Login(string username, string password, Action<string> callback)
         {
             IsLogining = true;
-            service.Login(username, password, delegate(string token, bool success, string error)
+            App.Service.Login(username, password, delegate(string token, bool success, string error)
             {
                 IsLogining = false;
 
                 if (error == null)
-                    service.Token = token;
+                    App.Service.Token = token;
 
                 callback(error);
             });
@@ -196,7 +193,7 @@ namespace sbbs_client_wp7
         // 载入十大
         public void LoadTopten()
         {
-            service.Topten(delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
+            App.Service.Topten(delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
             {
                 IsToptenLoaded = true;
                 if (error != null)
@@ -212,7 +209,7 @@ namespace sbbs_client_wp7
         {
             if (IsLogin)
             {
-                service.Favorates(delegate(ObservableCollection<BoardViewModel> boards, bool success, string error)
+                App.Service.Favorates(delegate(ObservableCollection<BoardViewModel> boards, bool success, string error)
                 {
                     IsFavoratesLoaded = true;
                     if (error != null)
