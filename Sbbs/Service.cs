@@ -52,7 +52,7 @@ namespace sbbs_client_wp7.Sbbs
         public void Favorates(Action<BoardCollection, bool, string> callback)
         {
             WebClient wc = new WebClient();
-            Uri uri = new Uri(apiBase + "fav/list" + apiPost + "?token=" + HttpUtility.UrlEncode(Token));
+            Uri uri = new Uri(apiBase + "fav/list" + apiPost + "?up=1&token=" + HttpUtility.UrlEncode(Token));
 
             wc.DownloadStringCompleted += DownloadedAndParse<BoardCollection, BoardsResponse>;
             wc.DownloadStringAsync(uri, new ServiceArg<BoardCollection>() { Callback = callback });

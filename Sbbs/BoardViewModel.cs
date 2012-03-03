@@ -15,6 +15,7 @@ namespace sbbs_client_wp7.Sbbs
         private uint users;
         private uint count;
         private bool leaf = true;
+        private ObservableCollection<BoardViewModel> boards;
 
         [DataMember(Name = "name")]
         public string EnglishName
@@ -114,6 +115,23 @@ namespace sbbs_client_wp7.Sbbs
                 {
                     leaf = value;
                     NotifyPropertyChanged("Leaf");
+                }
+            }
+        }
+
+        [DataMember(Name = "boards")]
+        public ObservableCollection<BoardViewModel> Boards
+        {
+            get
+            {
+                return boards;
+            }
+            set
+            {
+                if (value != boards)
+                {
+                    boards = value;
+                    NotifyPropertyChanged("Boards");
                 }
             }
         }

@@ -114,7 +114,10 @@ namespace sbbs_client_wp7
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", ViewModel.FavoratesItems);
+            if (ViewModel.FavoratesDirectory.First != null)
+                LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", ViewModel.FavoratesDirectory.First.Value);
+            else
+                LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", ViewModel.FavoratesItems);
             LocalCache.Set<ObservableCollection<TopicViewModel>>("Topten", ViewModel.ToptenItems);
         }
 

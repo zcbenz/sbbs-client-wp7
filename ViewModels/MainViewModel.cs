@@ -27,6 +27,7 @@ namespace sbbs_client_wp7
             // 初始化
             CurrentBoard = new CurrentBoardViewModel();
             CurrentTopic = new CurrentTopicViewModel();
+            FavoratesDirectory = new LinkedList<ObservableCollection<BoardViewModel>>();
         }
         
         // 十大热帖
@@ -95,6 +96,8 @@ namespace sbbs_client_wp7
                 }
             }
         }
+        // --收藏夹浏览栈
+        public LinkedList<ObservableCollection<BoardViewModel>> FavoratesDirectory { get; set; }
 
         // 当前版面
         public CurrentBoardViewModel CurrentBoard { get; set; }
