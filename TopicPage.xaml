@@ -13,7 +13,6 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
-    toolkit:TiltEffect.IsTiltEnabled="True"
     d:DataContext="{d:DesignData SampleData/CurrentTopicViewModelSampleData.xaml}">
 
     <shell:SystemTray.ProgressIndicator>
@@ -55,9 +54,20 @@
             <TextBlock x:Name="BoardName" Text="{Binding Board}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="BoardDescription" Text="{Binding Title}" TextWrapping="Wrap" Margin="9,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </StackPanel>
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
+        
+        <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <ListBox ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource ContentDataTemplate}"
+                            ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                <Button toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12 0" x:Name="LoadMore" Content="载入更多" Click="LoadMore_Click"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>

@@ -76,6 +76,21 @@ namespace sbbs_client_wp7
             }
         }
 
+        // 点击十大
+        private void Topten_Selected(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 1)
+            {
+                // 清除选择，否则同样的项目无法点击第二次
+                (sender as ListBox).SelectedIndex = -1;
+
+                TopicViewModel topic = e.AddedItems[0] as TopicViewModel;
+
+                this.NavigationService.Navigate(
+                    new Uri("/TopicPage.xaml?board=" + topic.Board + "&id=" + topic.Id + "&title=" + HttpUtility.UrlEncode(topic.Title), UriKind.Relative));
+            }
+        }
+
         // 载入收藏夹
         private void LoadFavorates()
         {

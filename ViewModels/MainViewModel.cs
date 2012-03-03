@@ -27,6 +27,7 @@ namespace sbbs_client_wp7
 
             // 初始化
             CurrentBoard = new CurrentBoardViewModel();
+            CurrentTopic = new CurrentTopicViewModel();
         }
         
         // 十大热帖
@@ -98,6 +99,8 @@ namespace sbbs_client_wp7
 
         // 当前版面
         public CurrentBoardViewModel CurrentBoard { get; set; }
+        // 当前话题
+        public CurrentTopicViewModel CurrentTopic { get; set; }
 
         // 是否已经登陆
         private bool isLogin;

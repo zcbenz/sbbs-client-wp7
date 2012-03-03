@@ -39,16 +39,14 @@ namespace sbbs_client_wp7
             if (this.NavigationContext.QueryString.ContainsKey("board"))
             {
                 string board = this.NavigationContext.QueryString["board"];
-                LoadMore.IsEnabled = false;
-
                 // 跳转到其他版面时清空并重载
                 if (board != App.ViewModel.CurrentBoard.EnglishName) {
                     // 重置标题
                     App.ViewModel.CurrentBoard.EnglishName = board;
                     App.ViewModel.CurrentBoard.Description = this.NavigationContext.QueryString["description"];
 
-                    // 还原加载按钮
-                    LoadMore.IsEnabled = true;
+                    LoadMore.IsEnabled = false;
+                    App.ViewModel.CurrentBoard.IsLoaded = false;
 
                     // 清空已有内容
                     if (App.ViewModel.CurrentBoard.Topics != null)
@@ -57,6 +55,9 @@ namespace sbbs_client_wp7
                     // 重新加载
                     App.Service.Board(board, currentPage * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
                     {
+                        // 还原加载按钮
+                        LoadMore.IsEnabled = true;
+
                         App.ViewModel.CurrentBoard.IsLoaded = true;
                         if (error == null)
                             App.ViewModel.CurrentBoard.Topics = topics;
@@ -68,21 +69,22 @@ namespace sbbs_client_wp7
         private void LoadMore_Click(object sender, RoutedEventArgs e)
         {
             App.ViewModel.CurrentBoard.IsLoaded = false;
+            LoadMore.IsEnabled = false;
             App.Service.Board(App.ViewModel.CurrentBoard.EnglishName, (currentPage + 1)* pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
             {
+                // 判断后面是否还有内容
+                if (error == null && topics.Count < pageSize)
+                    LoadMore.IsEnabled = false;
+                else
+                    LoadMore.IsEnabled = true;
+
                 App.ViewModel.CurrentBoard.IsLoaded = true;
                 if (error == null)
                 {
                     currentPage++;
 
-                    // 判断后面时候还有内容
-                    if (topics.Count < pageSize)
-                        LoadMore.IsEnabled = false;
-
                     foreach (TopicViewModel topic in topics)
-                    {
                         App.ViewModel.CurrentBoard.Topics.Add(topic);
-                    }
                 }
                 else
                 {
@@ -90,5 +92,19 @@ namespace sbbs_client_wp7
                 }
             });
         }
+
+        private void Topic_Selected(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 1)
+            {
+                // 清除选择，否则同样的项目无法点击第二次
+                (sender as ListBox).SelectedIndex = -1;
+                TopicViewModel topic = e.AddedItems[0] as TopicViewModel;
+
+                this.NavigationService.Navigate(
+                    new Uri("/TopicPage.xaml?board=" + topic.Board + "&id=" + topic.Id + "&title=" + HttpUtility.UrlEncode(topic.Title), UriKind.Relative));
+            }
+        }
+
     }
 }

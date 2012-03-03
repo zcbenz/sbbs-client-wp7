@@ -14,10 +14,27 @@ namespace sbbs_client_wp7
 
     public class CurrentTopicViewModel : INotifyPropertyChanged
     {
+        int id;
         private string board;
         private string title;
         private bool isLoaded;
         private ObservableCollection<TopicViewModel> topics;
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    NotifyPropertyChanged("Id");
+                }
+            }
+        }
 
         public string Board
         {

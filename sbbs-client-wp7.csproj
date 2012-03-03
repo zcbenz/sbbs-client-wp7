@@ -89,6 +89,7 @@
     <Compile Include="ValueConverters\RepliesHotConverter.cs" />
     <Compile Include="Sbbs\BoardViewModel.cs" />
     <Compile Include="Sbbs\TopicViewModel.cs" />
+    <Compile Include="ValueConverters\StampDateConverter.cs" />
     <Compile Include="ViewModels\CurrentBoardViewModel.cs" />
     <Compile Include="ViewModels\CurrentTopicViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

@@ -78,7 +78,8 @@
             <controls:PanoramaItem Header="十大热帖" HeaderTemplate="{StaticResource MyItemHeaderTemplate}">
                 <ScrollViewer>
                     <ListBox ItemsSource="{Binding ToptenItems}" ItemTemplate="{StaticResource TopicDataTemplate}"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                             SelectionChanged="Topten_Selected">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
