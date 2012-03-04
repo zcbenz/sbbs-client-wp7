@@ -15,6 +15,7 @@ namespace sbbs_client_wp7
 {
     using Sbbs;
     using System.Collections.ObjectModel;
+    using System.Windows.Threading;
 
     public partial class MainPage : PhoneApplicationPage
     {
@@ -38,12 +39,25 @@ namespace sbbs_client_wp7
         }
 
         // Load data for the ViewModel Items
+        private bool isFirstLoading = true;
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
+            // 启动时延迟2秒更新
+            if (isFirstLoading)
             {
-                LoadTopten();
-                LoadFavorates();
+                isFirstLoading = false;
+
+                // 延迟两秒后开始刷新
+                DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(2) };
+                timer.Tick += delegate(object s, EventArgs arg)
+                {
+                    App.ViewModel.IsDataLoaded = false; // 标记开始更新
+
+                    LoadTopten();
+                    LoadFavorates();
+                    timer.Stop();
+                };
+                timer.Start();
             }
         }
 

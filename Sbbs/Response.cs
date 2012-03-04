@@ -48,6 +48,22 @@ namespace sbbs_client_wp7.Sbbs
         }
     }
 
+    // 返回单个主题
+    [DataContract]
+    public class TopicResponse : Response, IResponse<TopicViewModel>
+    {
+        [DataMember(Name = "topic")]
+        public TopicViewModel topic;
+
+        public TopicViewModel Root
+        {
+            get
+            {
+                return topic;
+            }
+        }
+    }
+
     // 返回版面集合
     // 符合类型： 收藏夹
     [DataContract]

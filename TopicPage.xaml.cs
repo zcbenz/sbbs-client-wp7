@@ -123,5 +123,11 @@ namespace sbbs_client_wp7
                     App.ViewModel.CurrentTopic.Topics = topics;
             });
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ListBox).SelectedIndex != -1)
+                (sender as ListBox).SelectedIndex = -1;
+        }
     }
 }

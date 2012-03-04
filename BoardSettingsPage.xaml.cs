@@ -26,9 +26,8 @@ namespace sbbs_client_wp7
             base.OnNavigatedTo(e);
 
             // 恢复选择
-            int[] modeMap = { 0, 1, 2, 2 };
             ignoreSelection = true;
-            Mode.SelectedIndex = modeMap[App.Service.BoardMode];
+            Mode.SelectedIndex = App.Service.BoardMode % 3;
         }
 
         private bool ignoreSelection = true; // 永远忽略第一次选择（由系统触发）
@@ -44,8 +43,7 @@ namespace sbbs_client_wp7
             ListPicker list = sender as ListPicker;
 
             // 设置并保存模式
-            int[] modeMap = { 0, 1, 3};
-            int mode = modeMap[list.SelectedIndex];
+            int mode = list.SelectedIndex;
 
             if (mode != App.Service.BoardMode)
             {

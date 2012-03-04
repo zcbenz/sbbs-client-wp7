@@ -146,7 +146,7 @@ namespace sbbs_client_wp7
         public event LoginChangedHandler LoginChanged;
 
         // 数据是否全部载入完毕
-        private bool isDataLoaded;
+        private bool isDataLoaded = true; // 初始时假装更新完毕，进入程序后再开始更新
         public bool IsDataLoaded
         {
             get

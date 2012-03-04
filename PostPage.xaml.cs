@@ -52,7 +52,7 @@ namespace sbbs_client_wp7
         {
             viewModel.IsLoading = true;
 
-            App.Service.TopicPost(board, reid, TitleText.Text, ContentText.Text, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
+            App.Service.TopicPost(board, reid, TitleText.Text, ContentText.Text, delegate(TopicViewModel topic, bool success, string error)
             {
                 viewModel.IsLoading = false;
                 if (!success)
@@ -66,7 +66,7 @@ namespace sbbs_client_wp7
                         App.ViewModel.CurrentBoard.NeedRefresh = true;
                     // 跳转到话题时直接在最后添加
                     else
-                        App.ViewModel.CurrentTopic.Topics.Add(topics[0]);
+                        App.ViewModel.CurrentTopic.Topics.Add(topic);
 
                     NavigationService.GoBack();
                 }

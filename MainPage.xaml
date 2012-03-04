@@ -22,7 +22,7 @@
     toolkit:TiltEffect.IsTiltEnabled="True">
 
     <shell:SystemTray.ProgressIndicator>
-        <shell:ProgressIndicator Text="载入中..."
+        <shell:ProgressIndicator Text="更新中..."
             IsVisible="{Binding IsDataLoaded, Converter={StaticResource BoolReverseConverter}}"
             IsIndeterminate="{Binding IsDataLoaded, Converter={StaticResource BoolReverseConverter}}"/>
     </shell:SystemTray.ProgressIndicator>

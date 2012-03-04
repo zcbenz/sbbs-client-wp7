@@ -87,14 +87,14 @@ namespace sbbs_client_wp7.Sbbs
         }
 
         // 发帖
-        public void TopicPost(string board, int reid, string title, string content, Action<TopicCollection, bool, string> callback)
+        public void TopicPost(string board, int reid, string title, string content, Action<TopicViewModel, bool, string> callback)
         {
             WebClient wc = new WebClient();
             Uri uri = new Uri(apiBase + "topic/post" + apiPost + "?type=2&token=" + HttpUtility.UrlEncode(Token) + "&board=" + board + "&reid=" + reid
                 + "&title=" + HttpUtility.UrlEncode(title) + "&content=" + HttpUtility.UrlEncode(content));
 
-            wc.DownloadStringCompleted += DownloadedAndParse<TopicCollection, TopicsResponse>;
-            wc.DownloadStringAsync(uri, new ServiceArg<TopicCollection>() { Callback = callback });
+            wc.DownloadStringCompleted += DownloadedAndParse<TopicViewModel, TopicResponse>;
+            wc.DownloadStringAsync(uri, new ServiceArg<TopicViewModel>() { Callback = callback });
         }
 
         // 下载完成后分析JSON数据然后调用回调函数
