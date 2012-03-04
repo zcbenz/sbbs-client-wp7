@@ -68,6 +68,11 @@ namespace sbbs_client_wp7
             NavigationService.Navigate(new Uri("/PostPage.xaml?board=" + App.ViewModel.CurrentBoard.EnglishName, UriKind.Relative));
         }
 
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/BoardSettingsPage.xaml", UriKind.Relative));
+        }
+
         private void LoadMore_Click(object sender, RoutedEventArgs e)
         {
             App.ViewModel.CurrentBoard.IsLoaded = false;

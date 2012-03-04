@@ -108,6 +108,11 @@ namespace sbbs_client_wp7
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
             // Ensure that required application state is persisted here.
+            if (ViewModel.FavoratesDirectory.First != null)
+                LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", ViewModel.FavoratesDirectory.First.Value);
+            else
+                LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", ViewModel.FavoratesItems);
+            LocalCache.Set<ObservableCollection<TopicViewModel>>("Topten", ViewModel.ToptenItems);
         }
 
         // Code to execute when the application is closing (eg, user hit Back)

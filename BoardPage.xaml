@@ -53,8 +53,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding Description}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding EnglishName}" Margin="9,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+            <TextBlock Text="{Binding Description}" Margin="0" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding EnglishName}" Margin="0,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -75,13 +75,12 @@
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton Click="NewPost_Click" IconUri="/Images/new.png" Text="发帖"/>
             <shell:ApplicationBarIconButton Click="Refresh_Click" IconUri="/Images/refresh.png" Text="刷新"/>
-            <!--<shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>-->
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Click="Settings_Click" Text="版面设置"/>
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

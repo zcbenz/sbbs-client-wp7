@@ -68,6 +68,9 @@
     <Compile Include="BoardPage.xaml.cs">
       <DependentUpon>BoardPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BoardSettingsPage.xaml.cs">
+      <DependentUpon>BoardSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DynamicOrientationChanges\AnimateOrientationChangesFrame.cs" />
     <Compile Include="DynamicOrientationChanges\FadeOrientationChangesFrame.cs" />
     <Compile Include="DynamicOrientationChanges\HybridOrientationChangesFrame.cs" />
@@ -114,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="BoardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BoardSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,9 +176,11 @@
     <Resource Include="PanoramaBackground.png" />
     <Content Include="Images\addcomment.png" />
     <Content Include="Images\attach.png" />
+    <Resource Include="Images\cancel.png" />
     <Content Include="Images\circle.png" />
     <Content Include="Images\new.png" />
     <Content Include="Images\refresh.png" />
+    <Resource Include="Images\save.png" />
     <Content Include="Images\send.text.png" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>

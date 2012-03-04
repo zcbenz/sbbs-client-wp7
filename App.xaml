@@ -80,7 +80,7 @@
             <Grid Margin="0 0 0 10">
                 <Rectangle Fill="{Binding Leaf, Converter={StaticResource LeafBrushConverter}}" Width="8" HorizontalAlignment="Left"/>
                 <StackPanel Orientation="Vertical" Margin="4 0 0 0">
-                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding EnglishName}"/>
+                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Foreground="{Binding Unread, Converter={StaticResource BoolAccentConverter}}" Text="{Binding EnglishName}"/>
                     <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Description}"/>
                 </StackPanel>
             </Grid>

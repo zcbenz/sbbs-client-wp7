@@ -28,6 +28,9 @@ namespace sbbs_client_wp7.Sbbs
         // 用户认证Token
         public string Token { get; set; }
 
+        // 默认版面模式
+        public int BoardMode { get; set; }
+
         // 登录换取Token
         public void Login(string username, string password, Action<string, bool, string> callback)
         {
@@ -61,8 +64,13 @@ namespace sbbs_client_wp7.Sbbs
         // 获取版面
         public void Board(string board, int start, int limit, Action<TopicCollection, bool, string> callback)
         {
+            Board(board, BoardMode, start, limit, callback);
+        }
+
+        public void Board(string board, int mode, int start, int limit, Action<TopicCollection, bool, string> callback)
+        {
             WebClient wc = new WebClient();
-            Uri uri = new Uri(apiBase + "board/" + board + apiPost + "?token=" + HttpUtility.UrlEncode(Token) + "&start=" + start + "&limit=" + limit);
+            Uri uri = new Uri(apiBase + "board/" + board + apiPost + "?token=" + HttpUtility.UrlEncode(Token) + "&start=" + start + "&limit=" + limit + "&mode=" + mode);
 
             wc.DownloadStringCompleted += DownloadedAndParse<TopicCollection, TopicsResponse>;
             wc.DownloadStringAsync(uri, new ServiceArg<TopicCollection>() { Callback = callback });
