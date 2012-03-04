@@ -80,10 +80,16 @@
     </Compile>
     <Compile Include="MetroInMotion\LinqToVisualTree.cs" />
     <Compile Include="MetroInMotion\MetroInMotion.cs" />
+    <Compile Include="PostPage.xaml.cs">
+      <DependentUpon>PostPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sbbs\Response.cs" />
     <Compile Include="Sbbs\Service.cs" />
     <Compile Include="Sbbs\UserViewModel.cs" />
+    <Compile Include="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tile.xaml.cs">
       <DependentUpon>Tile.xaml</DependentUpon>
     </Compile>
@@ -100,6 +106,7 @@
     <Compile Include="ViewModels\CurrentBoardViewModel.cs" />
     <Compile Include="ViewModels\CurrentTopicViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\LoadingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -130,6 +137,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="PostPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,9 +167,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="PanoramaBackground.png" />
+    <Content Include="Images\addcomment.png" />
+    <Content Include="Images\attach.png" />
     <Content Include="Images\circle.png" />
     <Content Include="Images\new.png" />
     <Content Include="Images\refresh.png" />
+    <Content Include="Images\send.text.png" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>

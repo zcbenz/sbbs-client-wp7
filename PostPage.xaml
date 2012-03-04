@@ -1,25 +1,25 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="sbbs_client_wp7.TopicPage"
+    x:Class="sbbs_client_wp7.PostPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True"
-    shell:SystemTray.Opacity="{Binding IsLoaded, Converter={StaticResource LoadedOpacityConerter}}"
-    d:DataContext="{d:DesignData SampleData/CurrentTopicViewModelSampleData.xaml}">
-
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.Opacity="{Binding IsLoading, Converter={StaticResource LoadedOpacityConerter}, ConverterParameter=true}"
+    shell:SystemTray.IsVisible="True">
+    
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator Text="载入中..."
-            IsVisible="{Binding IsLoaded, Converter={StaticResource BoolReverseConverter}}"
-            IsIndeterminate="{Binding IsLoaded, Converter={StaticResource BoolReverseConverter}}"/>
+            IsVisible="{Binding IsLoading}"
+            IsIndeterminate="{Binding IsLoading}"/>
     </shell:SystemTray.ProgressIndicator>
 
     <toolkit:TransitionService.NavigationInTransition>
@@ -50,31 +50,30 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding Board}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="{Binding Title}" TextWrapping="Wrap" Margin="9,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+            <TextBlock x:Name="Board" Text="版面" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="TypeTitle" Text="发帖" Margin="9,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </StackPanel>
-        
-        <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel>
-                <ListBox ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource ContentDataTemplate}"
-                            ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-                <Button toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12 0" x:Name="LoadMore" Content="载入更多" Click="LoadMore_Click"/>
-            </StackPanel>
-        </ScrollViewer>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="标题" Style="{StaticResource PhoneTextGroupHeaderStyle}" />
+            <TextBox x:Name="TitleText" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="1" />
+            <TextBlock Text="内容" Grid.Row="2" Style="{StaticResource PhoneTextGroupHeaderStyle}" />
+            <TextBox x:Name="ContentText" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="3" />
+        </Grid>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton Click="Reply_Click" IconUri="/Images/addcomment.png" Text="回复"/>
-            <shell:ApplicationBarIconButton Click="Refresh_Click" IconUri="/Images/refresh.png" Text="刷新"/>
+            <shell:ApplicationBarIconButton Click="Post_Click" IconUri="/Images/send.text.png" Text="发帖"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/attach.png" Text="附件"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

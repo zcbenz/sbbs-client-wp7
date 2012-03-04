@@ -19,6 +19,9 @@ namespace sbbs_client_wp7
         private bool isLoaded;
         private ObservableCollection<TopicViewModel> topics;
 
+        // 全局变量，用于标记跳转到版面时是否需要刷新
+        public bool NeedRefresh { get; set; }
+
         public string EnglishName
         {
             get

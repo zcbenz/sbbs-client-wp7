@@ -70,11 +70,7 @@
                     <TextBlock Style="{StaticResource PhoneTextAccentStyle}" Text="{Binding Author}"/>
                     <TextBlock HorizontalAlignment="Right" Text="{Binding Time, Converter={StaticResource StampDateConverter}}"/>
                 </Grid>
-                <RichTextBox Margin="-12 0 0 8">
-                    <Paragraph>
-                        <Run Text="{Binding Content}"/>
-                    </Paragraph>
-                </RichTextBox>
+                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0 0 0 12"/>
             </StackPanel>
         </DataTemplate>
         

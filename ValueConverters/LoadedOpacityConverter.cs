@@ -17,7 +17,8 @@ namespace sbbs_client_wp7
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? 0 : 0.5;
+            bool reverse = parameter != null;
+            return ((bool)value ^ reverse)? 0 : 0.5;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

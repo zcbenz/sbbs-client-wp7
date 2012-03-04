@@ -87,6 +87,12 @@ namespace sbbs_client_wp7
             LoadTopics();
         }
 
+        private void Reply_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/PostPage.xaml?title=" + HttpUtility.UrlEncode(App.ViewModel.CurrentTopic.Title) + "&board=" + App.ViewModel.CurrentTopic.Board
+                    + "&reid=" + App.ViewModel.CurrentTopic.Id, UriKind.Relative));
+        }
+
         private void LoadTopics()
         {
             App.ViewModel.CurrentTopic.IsLoaded = false;

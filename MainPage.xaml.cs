@@ -132,6 +132,7 @@ namespace sbbs_client_wp7
                     if (error != null)
                         return;
 
+                    App.ViewModel.FavoratesDirectory.Clear();
                     App.ViewModel.FavoratesItems = boards;
                 });
             }

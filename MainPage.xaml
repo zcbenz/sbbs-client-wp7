@@ -98,13 +98,15 @@
                         <Setter Property="Margin" Value="5"/>
                     </Style>
                 </toolkit:WrapPanel.Resources>
-                    
-                <local:Tile Title="热门版面"/>
-                <local:Tile Title="最近浏览"/>
+
                 <local:Tile Title="登录" MouseLeftButtonUp="Login_Click" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
-                <local:Tile Title="注册" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                <local:Tile Title="热门版面"/>
+                <local:Tile Title="分区热点"/>
+                <local:Tile Title="版面分区"/>
+                <local:Tile Title="最近浏览"/>
                 <local:Tile Title="我的信箱" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
-                <local:Tile Title="设置" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
+                <local:Tile Title="设置"/>
+                <local:Tile Title="注册" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
                 <local:Tile Title="关于"/>
             </toolkit:WrapPanel>
         </controls:PanoramaItem>

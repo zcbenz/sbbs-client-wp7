@@ -31,7 +31,14 @@ namespace sbbs_client_wp7
         {
             base.OnNavigatedTo(e);
 
-            if (this.NavigationContext.QueryString.ContainsKey("board"))
+            // 从发帖页面返回，且需要刷新
+            if (App.ViewModel.CurrentBoard.NeedRefresh)
+            {
+                App.ViewModel.CurrentBoard.NeedRefresh = false;
+                Refresh_Click(null, null);
+            }
+            // 浏览版面
+            else if (this.NavigationContext.QueryString.ContainsKey("board"))
             {
                 string board = this.NavigationContext.QueryString["board"];
                 // 跳转到其他版面时清空并重载
@@ -54,6 +61,11 @@ namespace sbbs_client_wp7
         {
             currentPage = 0;
             LoadTopics();
+        }
+
+        private void NewPost_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/PostPage.xaml?board=" + App.ViewModel.CurrentBoard.EnglishName, UriKind.Relative));
         }
 
         private void LoadMore_Click(object sender, RoutedEventArgs e)

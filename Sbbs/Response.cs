@@ -32,7 +32,7 @@ namespace sbbs_client_wp7.Sbbs
     }
 
     // 返回主题集合
-    // 符合类型： 十大
+    // 符合类型： 十大，版面
     [DataContract]
     public class TopicsResponse : Response, IResponse<ObservableCollection<TopicViewModel>>
     {

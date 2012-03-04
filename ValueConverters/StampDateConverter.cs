@@ -19,14 +19,14 @@ namespace sbbs_client_wp7
         {
             DateTime date = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             date = date.AddSeconds((int)value).ToLocalTime();
-            DateTime now = new DateTime();
+            DateTime now = DateTime.Now;
 
             if (date.Year == now.Year && date.Month == now.Month && date.Day == now.Day)
                 return date.ToString("HH:mm", culture);
             else if (date.Year == now.Year)
                 return date.ToString("MM月d日 HH:mm", culture);
             else
-                return date.ToString("yyyy MM月d日", culture);
+                return date.ToString("yyyy年MM月d日", culture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
