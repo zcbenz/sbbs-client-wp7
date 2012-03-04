@@ -27,11 +27,20 @@ namespace sbbs_client_wp7
 
             // 恢复选择
             int[] modeMap = { 0, 1, 2, 2 };
+            ignoreSelection = true;
             Mode.SelectedIndex = modeMap[App.Service.BoardMode];
         }
 
+        private bool ignoreSelection = true; // 永远忽略第一次选择（由系统触发）
         private void Mode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // 设置标记忽略事件
+            if (ignoreSelection)
+            {
+                ignoreSelection = false;
+                return;
+            }
+
             ListPicker list = sender as ListPicker;
 
             // 设置并保存模式

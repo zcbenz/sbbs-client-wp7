@@ -81,9 +81,15 @@ namespace sbbs_client_wp7
             {
                 // 判断后面是否还有内容
                 if (error == null && topics.Count < pageSize)
+                {
+                    LoadMore.Visibility = Visibility.Collapsed;
                     LoadMore.IsEnabled = false;
+                }
                 else
+                {
+                    LoadMore.Visibility = Visibility.Visible;
                     LoadMore.IsEnabled = true;
+                }
 
                 App.ViewModel.CurrentBoard.IsLoaded = true;
                 if (error == null)
@@ -126,9 +132,15 @@ namespace sbbs_client_wp7
             {
                 // 判断后面是否还有内容
                 if (error == null && topics.Count < pageSize)
+                {
+                    LoadMore.Visibility = Visibility.Collapsed;
                     LoadMore.IsEnabled = false;
+                }
                 else
+                {
+                    LoadMore.Visibility = Visibility.Visible;
                     LoadMore.IsEnabled = true;
+                }
 
                 App.ViewModel.CurrentBoard.IsLoaded = true;
                 if (error == null)

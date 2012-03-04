@@ -35,9 +35,15 @@ namespace sbbs_client_wp7
             {
                 // 判断后面是否还有内容
                 if (error == null && topics.Count < pageSize)
+                {
+                    LoadMore.Visibility = Visibility.Collapsed;
                     LoadMore.IsEnabled = false;
+                }
                 else
+                {
+                    LoadMore.Visibility = Visibility.Visible;
                     LoadMore.IsEnabled = true;
+                }
 
                 App.ViewModel.CurrentTopic.IsLoaded = true;
                 if (error == null)
@@ -101,11 +107,16 @@ namespace sbbs_client_wp7
             // 重新加载
             App.Service.Topic(App.ViewModel.CurrentTopic.Board, App.ViewModel.CurrentTopic.Id, currentPage * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
             {
-                // 判断后面是否还有内容
                 if (error == null && topics.Count < pageSize)
+                {
+                    LoadMore.Visibility = Visibility.Collapsed;
                     LoadMore.IsEnabled = false;
+                }
                 else
+                {
+                    LoadMore.Visibility = Visibility.Visible;
                     LoadMore.IsEnabled = true;
+                }
 
                 App.ViewModel.CurrentTopic.IsLoaded = true;
                 if (error == null)

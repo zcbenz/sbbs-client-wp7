@@ -68,7 +68,7 @@
                         </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>
-                <Button toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12 0" x:Name="LoadMore" Content="载入更多" Click="LoadMore_Click"/>
+                <Button Visibility="Collapsed" toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12 0" x:Name="LoadMore" Content="载入更多" Click="LoadMore_Click"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>
