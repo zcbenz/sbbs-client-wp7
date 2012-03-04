@@ -103,6 +103,9 @@ namespace sbbs_client_wp7
                 (sender as ListBox).SelectedIndex = -1;
                 TopicViewModel topic = e.AddedItems[0] as TopicViewModel;
 
+                // 清除未读
+                topic.Unread = false;
+
                 this.NavigationService.Navigate(
                     new Uri("/TopicPage.xaml?board=" + topic.Board + "&id=" + topic.Id + "&title=" + HttpUtility.UrlEncode(topic.Title), UriKind.Relative));
             }

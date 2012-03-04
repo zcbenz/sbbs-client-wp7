@@ -15,6 +15,7 @@
         <local:BoolReverseConverter x:Key="BoolReverseConverter" />
         <local:StampDateConverter x:Key="StampDateConverter" />
         <local:LoadedOpacityConerter x:Key="LoadedOpacityConerter" />
+        <local:BoolAccentConverter x:Key="BoolAccentConverter" />
 
         <!--RichTextBlock默认样式-->
         <Style TargetType="RichTextBox">
@@ -50,7 +51,7 @@
             <Grid Margin="0 0 0 10">
                 <Rectangle Fill="{StaticResource PhoneAccentBrush}" Width="8" HorizontalAlignment="Left"/>
                 <StackPanel Orientation="Vertical" Margin="4 0 0 0">
-                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap" Text="{Binding Title}"/>
+                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Foreground="{Binding Unread, Converter={StaticResource BoolAccentConverter}}" TextWrapping="Wrap" Text="{Binding Title}"/>
                     <Grid>
                         <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Author}"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">

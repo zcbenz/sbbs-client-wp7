@@ -105,9 +105,9 @@
                 <local:Tile Title="版面分区"/>
                 <local:Tile Title="最近浏览"/>
                 <local:Tile Title="我的信箱" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
-                <local:Tile Title="设置"/>
                 <local:Tile Title="注册" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
                 <local:Tile Title="关于"/>
+                <local:Tile Title="退出" MouseLeftButtonUp="Logout_Click"  Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
             </toolkit:WrapPanel>
         </controls:PanoramaItem>
     </controls:Panorama>
