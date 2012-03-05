@@ -74,6 +74,9 @@
     <Compile Include="DynamicOrientationChanges\AnimateOrientationChangesFrame.cs" />
     <Compile Include="DynamicOrientationChanges\FadeOrientationChangesFrame.cs" />
     <Compile Include="DynamicOrientationChanges\HybridOrientationChangesFrame.cs" />
+    <Compile Include="HotPage.xaml.cs">
+      <DependentUpon>HotPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LocalCache.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -89,6 +92,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sbbs\Response.cs" />
     <Compile Include="Sbbs\Service.cs" />
+    <Compile Include="Sbbs\TopicsGroupViewModel.cs" />
     <Compile Include="Sbbs\UserViewModel.cs" />
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -108,6 +112,7 @@
     <Compile Include="ValueConverters\StampDateConverter.cs" />
     <Compile Include="ViewModels\CurrentBoardViewModel.cs" />
     <Compile Include="ViewModels\CurrentTopicViewModel.cs" />
+    <Compile Include="ViewModels\HotViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\LoadingViewModel.cs" />
   </ItemGroup>
@@ -121,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BoardSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HotPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,6 +191,15 @@
     <Content Include="Images\refresh.png" />
     <Resource Include="Images\save.png" />
     <Content Include="Images\send.text.png" />
+    <Content Include="Images\Tiles\cup.png" />
+    <Content Include="Images\Tiles\folder.png" />
+    <Content Include="Images\Tiles\history.png" />
+    <Content Include="Images\Tiles\list.png" />
+    <Content Include="Images\Tiles\board.png" />
+    <Content Include="Images\Tiles\love.png" />
+    <Content Include="Images\Tiles\mailbox.png" />
+    <Content Include="Images\Tiles\pen.png" />
+    <Content Include="Images\Tiles\search.png" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>

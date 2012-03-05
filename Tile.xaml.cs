@@ -32,11 +32,11 @@ namespace sbbs_client_wp7
             }
         }
 
-        public String Source
+        public String Src
         {
             set
             {
-                Uri uri = new Uri(value, UriKind.Absolute);
+                Uri uri = new Uri(value, UriKind.RelativeOrAbsolute);
                 this.TileImage.Source = new BitmapImage(uri);
             }
             get

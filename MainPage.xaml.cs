@@ -62,13 +62,13 @@ namespace sbbs_client_wp7
         }
 
         // 登录
-        private void Login_Click(object sender, MouseButtonEventArgs e)
+        private void Login_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
         }
 
         // 注销
-        private void Logout_Click(object sender, MouseButtonEventArgs e)
+        private void Logout_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("真的要注销吗？", "注销", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
@@ -76,17 +76,23 @@ namespace sbbs_client_wp7
         }
 
         // 刷新十大
-        private void RefreshTopten_Click(object sender, MouseButtonEventArgs e)
+        private void RefreshTopten_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             App.ViewModel.IsToptenLoaded = false;
             LoadTopten();
         }
 
         // 刷新收藏夹
-        private void RefreshFavorates_Click(object sender, MouseButtonEventArgs e)
+        private void RefreshFavorates_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             App.ViewModel.IsFavoratesLoaded = false;
             LoadFavorates();
+        }
+
+        // 分区热点
+        private void HotTopics_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+
         }
 
         // 点击收藏夹

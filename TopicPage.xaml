@@ -52,7 +52,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding Board}" Margin="0" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Board}" Margin="2 0 0 0" Style="{StaticResource PhoneTextNormalStyle}"/>
             <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Visible">
                 <TextBlock x:Name="PageTitle" Text="{Binding Title}" Margin="0,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
             </ScrollViewer>

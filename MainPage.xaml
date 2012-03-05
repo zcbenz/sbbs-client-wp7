@@ -59,7 +59,7 @@
         <!-- 十大热帖 -->
         <controls:PanoramaItem>
             <controls:PanoramaItem.Header>
-                <TextBlock motion:MetroInMotion.Tilt="6" MouseLeftButtonUp="RefreshTopten_Click" Text="十大热帖" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
+                <TextBlock motion:MetroInMotion.Tilt="6" Tap="RefreshTopten_Tap" Text="十大热帖" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
             </controls:PanoramaItem.Header>
             <ListBox ItemsSource="{Binding ToptenItems}" ItemTemplate="{StaticResource TopicDataTemplate}"
                      SelectionChanged="Topten_Selected">
@@ -74,7 +74,7 @@
         <!-- 我的最爱 -->
         <controls:PanoramaItem>
             <controls:PanoramaItem.Header>
-                <TextBlock motion:MetroInMotion.Tilt="6" MouseLeftButtonUp="RefreshFavorates_Click" Text="收藏夹" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
+                <TextBlock motion:MetroInMotion.Tilt="6" Tap="RefreshFavorates_Tap" Text="收藏夹" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
             </controls:PanoramaItem.Header>
             <ListBox ItemsSource="{Binding FavoratesItems}" ItemTemplate="{StaticResource BoardDataTemplate}"
                         SelectionChanged="Favorates_Selected"
@@ -99,15 +99,16 @@
                     </Style>
                 </toolkit:WrapPanel.Resources>
 
-                <local:Tile Title="登录" MouseLeftButtonUp="Login_Click" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
-                <local:Tile Title="热门版面"/>
-                <local:Tile Title="分区热点"/>
-                <local:Tile Title="版面分区"/>
-                <local:Tile Title="最近浏览"/>
-                <local:Tile Title="我的信箱" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
-                <local:Tile Title="注册" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
-                <local:Tile Title="关于"/>
-                <local:Tile Title="退出" MouseLeftButtonUp="Logout_Click"  Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
+                <local:Tile Title="登录" Src="/Images/Tiles/pen.png" Tap="Login_Tap" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                <local:Tile Title="分区热点" Tap="HotTopics_Tap" Src="/Images/Tiles/board.png"/>
+                <local:Tile Title="热门版面" Src="/Images/Tiles/list.png"/>
+                <local:Tile Title="版面分区" Src="/Images/Tiles/folder.png"/>
+                <local:Tile Title="最近浏览" Src="/Images/Tiles/history.png"/>
+                <local:Tile Title="我的信箱" Src="/Images/Tiles/mailbox.png" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
+                <local:Tile Title="搜索" Src="/Images/Tiles/search.png"/>
+                <local:Tile Title="注册" Src="/Images/Tiles/cup.png" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                <local:Tile Title="关于" Src="/Images/Tiles/love.png"/>
+                <local:Tile Title="退出" Src="/Images/Tiles/pen.png" Tap="Logout_Tap"  Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
             </toolkit:WrapPanel>
         </controls:PanoramaItem>
     </controls:Panorama>
