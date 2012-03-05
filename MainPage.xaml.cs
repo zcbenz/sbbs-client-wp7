@@ -92,11 +92,27 @@ namespace sbbs_client_wp7
         // 分区热点
         private void HotTopics_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            NavigationService.Navigate(new Uri("/HotPage.xaml?type=0", UriKind.RelativeOrAbsolute));
+        }
 
+        // 热门版面
+        private void HotBoards_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/HotPage.xaml?type=1", UriKind.RelativeOrAbsolute));
+        }
+
+        // 版面分区
+        private void Sections_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/HotPage.xaml?type=2", UriKind.RelativeOrAbsolute));
+        }
+
+        // 浏览历史
+        private void History_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
         }
 
         // 点击收藏夹
-        
         private void Favorates_Selected(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 1)

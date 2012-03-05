@@ -23,7 +23,7 @@ namespace sbbs_client_wp7
         {
             // 载入保存的设置
             App.Service.Token = LocalCache.Get<string>("Token");
-            App.Service.BoardMode = LocalCache.Get<int>("BoardMode", 3);
+            App.Service.BoardMode = LocalCache.Get<int>("BoardMode", 2);
 
             // 初始化
             CurrentBoard = new CurrentBoardViewModel();

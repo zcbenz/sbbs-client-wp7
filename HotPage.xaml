@@ -11,11 +11,38 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     toolkit:TiltEffect.IsTiltEnabled="True"
     shell:SystemTray.Opacity="{Binding IsLoading, Converter={StaticResource LoadedOpacityConerter}, ConverterParameter=true}"
     shell:SystemTray.IsVisible="True">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator Text="载入中..."
+            IsVisible="{Binding IsLoading}"
+            IsIndeterminate="{Binding IsLoading}"/>
+    </shell:SystemTray.ProgressIndicator>
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -23,13 +50,27 @@
         <controls:Pivot Title="虎踞龙蟠BBS">
             <!--Pivot item one-->
             <controls:PivotItem Header="分区热点">
-                <ListBox ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource TopicDataTemplate}">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
+                <toolkit:LongListSelector SelectionChanged="LongListSelector_SelectionChanged" ItemsSource="{Binding TopicsGroupItems}" ItemTemplate="{StaticResource TopicDataTemplate}">
+                    <toolkit:LongListSelector.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <Border Margin="0 0 0 10" Background="{StaticResource PhoneAccentBrush}">
+                                <TextBlock Text="{Binding Title}" Foreground="White" Style="{StaticResource PhoneTextLargeStyle}"/>
+                            </Border>
+                        </DataTemplate>
+                    </toolkit:LongListSelector.GroupHeaderTemplate>
+                    <toolkit:LongListSelector.GroupItemTemplate>
+                        <DataTemplate>
+                            <Border Width="480" Height="60" Margin="0 0 0 10" Background="{StaticResource PhoneAccentBrush}">
+                                <TextBlock Text="{Binding Title}" Foreground="White" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                            </Border>
+                        </DataTemplate>
+                    </toolkit:LongListSelector.GroupItemTemplate>
+                    <toolkit:LongListSelector.GroupItemsPanel>
+                        <ItemsPanelTemplate>
+                            <toolkit:WrapPanel HorizontalAlignment="Stretch"/>
+                        </ItemsPanelTemplate>
+                    </toolkit:LongListSelector.GroupItemsPanel>
+                </toolkit:LongListSelector>
             </controls:PivotItem>
 
             <!--Pivot item two-->
@@ -41,12 +82,7 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="appbar_button1" IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton x:Name="appbar_button2" IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem x:Name="menuItem1" Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem x:Name="menuItem2" Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton IconUri="/Images/refresh.png" Text="刷新"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     

@@ -17,7 +17,7 @@
     shell:SystemTray.IsVisible="True">
     
     <shell:SystemTray.ProgressIndicator>
-        <shell:ProgressIndicator Text="载入中..."
+        <shell:ProgressIndicator Text="发布中..."
             IsVisible="{Binding IsLoading}"
             IsIndeterminate="{Binding IsLoading}"/>
     </shell:SystemTray.ProgressIndicator>

@@ -101,9 +101,9 @@
 
                 <local:Tile Title="登录" Src="/Images/Tiles/pen.png" Tap="Login_Tap" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
                 <local:Tile Title="分区热点" Tap="HotTopics_Tap" Src="/Images/Tiles/board.png"/>
-                <local:Tile Title="热门版面" Src="/Images/Tiles/list.png"/>
-                <local:Tile Title="版面分区" Src="/Images/Tiles/folder.png"/>
-                <local:Tile Title="最近浏览" Src="/Images/Tiles/history.png"/>
+                <local:Tile Title="热门版面" Tap="HotBoards_Tap" Src="/Images/Tiles/list.png"/>
+                <local:Tile Title="版面分区" Tap="Sections_Tap" Src="/Images/Tiles/folder.png"/>
+                <local:Tile Title="最近浏览" Tap="History_Tap" Src="/Images/Tiles/history.png"/>
                 <local:Tile Title="我的信箱" Src="/Images/Tiles/mailbox.png" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
                 <local:Tile Title="搜索" Src="/Images/Tiles/search.png"/>
                 <local:Tile Title="注册" Src="/Images/Tiles/cup.png" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>

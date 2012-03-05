@@ -81,6 +81,22 @@ namespace sbbs_client_wp7.Sbbs
         }
     }
 
+    // 返回首页热点
+    [DataContract]
+    public class HotTopicsResponse : Response, IResponse<ObservableCollection<HotTopicsViewModel>>
+    {
+        [DataMember(Name = "topics")]
+        public ObservableCollection<HotTopicsViewModel> topics;
+
+        public ObservableCollection<HotTopicsViewModel> Root
+        {
+            get
+            {
+                return topics;
+            }
+        }
+    }
+
     // 返回用户认证Token
     [DataContract]
     public class TokenResponse : Response, IResponse<string>
