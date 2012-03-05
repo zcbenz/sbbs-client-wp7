@@ -19,14 +19,15 @@ namespace sbbs_client_wp7
 
     public partial class HotPage : PhoneApplicationPage
     {
-        private HotViewModel viewModel = new HotViewModel();
-        private bool isHotTopicsLoading = true;
+        private bool isHotTopicsLoading;
 
         public HotPage()
         {
             InitializeComponent();
 
-            DataContext = viewModel;
+            if (App.ViewModel.Hot == null)
+                App.ViewModel.Hot = new HotViewModel();
+            DataContext = App.ViewModel.Hot;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,7 +40,7 @@ namespace sbbs_client_wp7
                 switch (type)
                 {
                     case 0:
-                        if (viewModel.TopicsGroupItems == null)
+                        if (App.ViewModel.Hot.TopicsGroupItems == null)
                             LoadHotTopics();
                         break;
                 }
@@ -48,7 +49,7 @@ namespace sbbs_client_wp7
 
         private void SetLoading()
         {
-            viewModel.IsLoading = isHotTopicsLoading;
+            App.ViewModel.Hot.IsLoading = isHotTopicsLoading;
         }
 
         private void LoadHotTopics()
@@ -71,7 +72,7 @@ namespace sbbs_client_wp7
                         newGroup.Add(newItem);
                     }
 
-                    viewModel.TopicsGroupItems = newGroup;
+                    App.ViewModel.Hot.TopicsGroupItems = newGroup;
                 }
             });
         }
@@ -91,6 +92,11 @@ namespace sbbs_client_wp7
                 NavigationService.Navigate(
                     new Uri("/TopicPage.xaml?board=" + topic.Board + "&id=" + topic.Id + "&title=" + HttpUtility.UrlEncode(topic.Title), UriKind.Relative));
             }
+        }
+
+        private void Refresh_Click(object sender, EventArgs e)
+        {
+            LoadHotTopics();
         }
     }
 }
