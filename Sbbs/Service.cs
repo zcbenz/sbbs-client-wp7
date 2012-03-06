@@ -76,6 +76,14 @@ namespace sbbs_client_wp7.Sbbs
             wc.DownloadStringAsync(uri, new ServiceArg<TopicCollection>() { Callback = callback });
         }
 
+        // 版面标记已读
+        public void BoardMarkRead(string board)
+        {
+            WebClient wc = new WebClient();
+            Uri uri = new Uri(apiBase + "board/" + board + "/markread" + apiPost + "?token=" + HttpUtility.UrlEncode(Token));
+            wc.DownloadStringAsync(uri);
+        }
+
         // 获取话题
         public void Topic(string board, int id, int start, int limit, Action<TopicCollection, bool, string> callback)
         {

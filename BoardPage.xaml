@@ -79,6 +79,7 @@
             <shell:ApplicationBarIconButton Click="NewPost_Click" IconUri="/Images/new.png" Text="发帖"/>
             <shell:ApplicationBarIconButton Click="Refresh_Click" IconUri="/Images/refresh.png" Text="刷新"/>
             <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Click="Clear_Click" Text="全部标记为已读"/>
                 <shell:ApplicationBarMenuItem Click="Settings_Click" Text="版面设置"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

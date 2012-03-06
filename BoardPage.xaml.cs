@@ -73,6 +73,15 @@ namespace sbbs_client_wp7
             NavigationService.Navigate(new Uri("/BoardSettingsPage.xaml", UriKind.Relative));
         }
 
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            App.Service.BoardMarkRead(App.ViewModel.CurrentBoard.EnglishName);
+            foreach (TopicViewModel topic in App.ViewModel.CurrentBoard.Topics)
+            {
+                topic.Unread = false;
+            }
+        }
+
         private void LoadMore_Click(object sender, RoutedEventArgs e)
         {
             App.ViewModel.CurrentBoard.IsLoaded = false;
