@@ -95,8 +95,18 @@ namespace sbbs_client_wp7
 
         private void Reply_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/PostPage.xaml?title=" + HttpUtility.UrlEncode(App.ViewModel.CurrentTopic.Title) + "&board=" + App.ViewModel.CurrentTopic.Board
-                    + "&reid=" + App.ViewModel.CurrentTopic.Id, UriKind.Relative));
+            TopicViewModel topic = TopicsList.SelectedItem as TopicViewModel;
+            if (topic == null)
+                NavigationService.Navigate(new Uri("/PostPage.xaml?title=" + HttpUtility.UrlEncode(App.ViewModel.CurrentTopic.Title) + "&board=" + App.ViewModel.CurrentTopic.Board
+                        + "&reid=" + App.ViewModel.CurrentTopic.Id, UriKind.Relative));
+            else
+                NavigationService.Navigate(new Uri("/PostPage.xaml?title=" + HttpUtility.UrlEncode(topic.Title) + "&board=" + topic.Board + "&reid=" + topic.Id, UriKind.Relative));
+        }
+
+        private void MenuReply_Click(object sender, EventArgs e)
+        {
+            TopicViewModel topic = (sender as MenuItem).DataContext as TopicViewModel;
+            NavigationService.Navigate(new Uri("/PostPage.xaml?title=" + HttpUtility.UrlEncode(topic.Title) + "&board=" + topic.Board + "&reid=" + topic.Id, UriKind.Relative));
         }
 
         private void LoadTopics()
@@ -126,7 +136,7 @@ namespace sbbs_client_wp7
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((sender as ListBox).SelectedIndex != -1)
+            if ((sender as ListBox).SelectedIndex == 0)
                 (sender as ListBox).SelectedIndex = -1;
         }
     }

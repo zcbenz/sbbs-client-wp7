@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:local="clr-namespace:sbbs_client_wp7"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
@@ -62,17 +63,6 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-        </DataTemplate>
-        
-        <!--话题内容Template-->
-        <DataTemplate x:Key="ContentDataTemplate">
-            <StackPanel>
-                <Grid Margin="-12 0 0 0">
-                    <TextBlock Style="{StaticResource PhoneTextAccentStyle}" Text="{Binding Author}"/>
-                    <TextBlock HorizontalAlignment="Right" Text="{Binding Time, Converter={StaticResource StampDateConverter}}"/>
-                </Grid>
-                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0 0 0 12"/>
-            </StackPanel>
         </DataTemplate>
         
         <!--版面列表Template-->

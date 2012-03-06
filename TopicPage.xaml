@@ -42,6 +42,26 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
+    
+    <phone:PhoneApplicationPage.Resources>
+        <!--话题内容Template-->
+        <DataTemplate x:Key="ContentDataTemplate">
+            <StackPanel>
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu>
+                        <toolkit:MenuItem Header="回复" Click="MenuReply_Click"/>
+                        <toolkit:MenuItem Header="发送站内信"/>
+                        <toolkit:MenuItem Header="查询用户"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+                <Grid Margin="-12 0 0 0">
+                    <TextBlock Style="{StaticResource PhoneTextAccentStyle}" Text="{Binding Author}"/>
+                    <TextBlock HorizontalAlignment="Right" Text="{Binding Time, Converter={StaticResource StampDateConverter}}"/>
+                </Grid>
+                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0 0 0 12"/>
+            </StackPanel>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -60,7 +80,7 @@
         
         <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <ListBox ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource ContentDataTemplate}"
+                <ListBox x:Name="TopicsList" ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource ContentDataTemplate}"
                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
                          SelectionChanged="ListBox_SelectionChanged">
                     <ListBox.ItemContainerStyle>
