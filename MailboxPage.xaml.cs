@@ -28,13 +28,21 @@ namespace sbbs_client_wp7
             App.ViewModel.Mailbox.IsLoading = isLoading[0] | isLoading[1] | isLoading[2];
         }
 
+        // 载入按钮集合
+        Button[] LoadMore = { null, null, null };
+
         public MailboxPage()
         {
             InitializeComponent();
 
             if (App.ViewModel.Mailbox == null)
                 App.ViewModel.Mailbox = new MailboxViewModel();
+
             DataContext = App.ViewModel.Mailbox;
+
+            LoadMore[0] = LoadMore1;
+            LoadMore[1] = LoadMore2;
+            LoadMore[2] = LoadMore3;
         }
 
         // 进入页面时根据参数切换到指定的页面
@@ -82,28 +90,65 @@ namespace sbbs_client_wp7
         }
 
         // 加载指定的信箱
-        private void LoadMailbox(int type)
+        private void LoadMailbox(int type, bool append = false)
         {
             isLoading[type] = true;
             SetLoading();
-            App.Service.MailBox(type, currentPage * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> mails, bool success, string error)
+            int loadPage = append ? currentPage + 1 : currentPage;
+            App.Service.MailBox(type, loadPage * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> mails, bool success, string error)
             {
                 isLoading[type] = false;
                 SetLoading();
 
                 if (mails != null)
                 {
-                    switch (type)
+                    // 直接覆盖
+                    if (!append)
                     {
-                        case 0:
-                            App.ViewModel.Mailbox.InboxItems = mails;
-                            break;
-                        case 1:
-                            App.ViewModel.Mailbox.SentItems = mails;
-                            break;
-                        case 2:
-                            App.ViewModel.Mailbox.DeletedItems = mails;
-                            break;
+                        switch (type)
+                        {
+                            case 0:
+                                App.ViewModel.Mailbox.InboxItems = mails;
+                                break;
+                            case 1:
+                                App.ViewModel.Mailbox.SentItems = mails;
+                                break;
+                            case 2:
+                                App.ViewModel.Mailbox.DeletedItems = mails;
+                                break;
+                        }
+                    }
+                    // 或者接在后面
+                    else
+                    {
+                        switch (type)
+                        {
+                            case 0:
+                                foreach (TopicViewModel mail in mails)
+                                    App.ViewModel.Mailbox.InboxItems.Add(mail);
+                                break;
+                            case 1:
+                                foreach (TopicViewModel mail in mails)
+                                    App.ViewModel.Mailbox.SentItems.Add(mail);
+                                break;
+                            case 2:
+                                foreach (TopicViewModel mail in mails)
+                                    App.ViewModel.Mailbox.DeletedItems.Add(mail);
+                                break;
+                        }
+                        ++currentPage;
+                    }
+
+                    // 判断是否显示下一页
+                    if (mails.Count < pageSize)
+                    {
+                        LoadMore[type].Visibility = Visibility.Collapsed;
+                        LoadMore[type].IsEnabled = false;
+                    }
+                    else
+                    {
+                        LoadMore[type].Visibility = Visibility.Visible;
+                        LoadMore[type].IsEnabled = true;
                     }
                 }
             });
@@ -112,7 +157,14 @@ namespace sbbs_client_wp7
         // 刷新按钮
         private void Refresh_Click(object sender, EventArgs e)
         {
+            currentPage = 0;
             LoadMailbox(MailboxPivot.SelectedIndex);
+        }
+
+        // 载入更多
+        private void LoadMore_Click(object sender, RoutedEventArgs e)
+        {
+            LoadMailbox(MailboxPivot.SelectedIndex, true);
         }
     }
 }
