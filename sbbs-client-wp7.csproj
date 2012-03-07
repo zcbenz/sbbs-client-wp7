@@ -84,6 +84,9 @@
     <Compile Include="MailboxPage.xaml.cs">
       <DependentUpon>MailboxPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MailPage.xaml.cs">
+      <DependentUpon>MailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,6 +172,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <DesignData Include="SampleData\MailSampleData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
     <Page Include="SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,6 +209,7 @@
     <Content Include="Images\new.png" />
     <Content Include="Images\refresh.png" />
     <Resource Include="Images\save.png" />
+    <Content Include="Images\respond.png" />
     <Content Include="Images\send.text.png" />
     <Content Include="Images\Tiles\cup.png" />
     <Content Include="Images\Tiles\folder.png" />

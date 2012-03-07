@@ -86,6 +86,10 @@ namespace sbbs_client_wp7
             {
                 // 清除选择，否则同样的项目无法点击第二次
                 (sender as ListBox).SelectedIndex = -1;
+
+                int type = MailboxPivot.SelectedIndex;
+                App.ViewModel.Mail = e.AddedItems[0] as TopicViewModel;
+                NavigationService.Navigate(new Uri("/MailPage.xaml?type=" + type, UriKind.Relative));
             }
         }
 

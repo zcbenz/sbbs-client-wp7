@@ -108,6 +108,8 @@ namespace sbbs_client_wp7
         public HotViewModel Hot { get; set; }
         // 邮箱页面
         public MailboxViewModel Mailbox { get; set; }
+        // 邮件
+        public TopicViewModel Mail { get; set; }
 
         // 是否已经登陆
         public bool IsLogin

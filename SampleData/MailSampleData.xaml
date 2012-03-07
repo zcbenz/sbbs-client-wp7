@@ -1,0 +1,18 @@
+﻿<sbbs:TopicViewModel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sbbs="clr-namespace:sbbs_client_wp7.Sbbs"
+    Author="one"
+    Time="1331122744"
+    Content="
+ [WEB] 
+    1、回复提醒及@功能 
+       当自己的帖子被回复时，或者有人在帖子里以@id的形式爱特你时，你将会收到通知 
+    2、显示单篇文章的已阅读数(即人气) 
+       文章阅读数由不同IP的阅读次数决定，同一IP在一段时间内反复阅读只记1次阅读。 
+
+ [Telnet] 
+    1、增加回复提醒及@功能 
+       在下方状态栏的用户id旁边显示通知数目，使用CTRL+K快捷键，然后选择3进入通知 
+    查看界面。"
+    Title="[系统]BBS近期功能改进"/>
