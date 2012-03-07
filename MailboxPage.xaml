@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="sbbs_client_wp7.HotPage"
+    x:Class="sbbs_client_wp7.MailboxPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -16,6 +16,21 @@
     toolkit:TiltEffect.IsTiltEnabled="True"
     shell:SystemTray.Opacity="{Binding IsLoading, Converter={StaticResource LoadedOpacityConerter}, ConverterParameter=true}"
     shell:SystemTray.IsVisible="True">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="MailDataTemplate">
+            <Grid Margin="0 0 0 10">
+                <Rectangle Fill="{StaticResource PhoneAccentBrush}" Width="8" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Vertical" Margin="4 0 0 0">
+                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Foreground="{Binding Unread, Converter={StaticResource BoolAccentConverter}}" TextWrapping="Wrap" Text="{Binding Title}"/>
+                    <Grid>
+                        <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Author}"/>
+                        <TextBlock HorizontalAlignment="Right" Text="{Binding Time, Converter={StaticResource StampDateConverter}}"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
 
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator Text="载入中..."
@@ -47,36 +62,10 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot x:Name="HotPivot" LoadedPivotItem="Pivot_LoadedPivotItem" Title="虎踞龙蟠BBS">
-            <!--Pivot item one-->
-            <controls:PivotItem Header="分区热点">
-                <toolkit:LongListSelector SelectionChanged="LongListSelector_SelectionChanged" ItemsSource="{Binding TopicsGroupItems}" ItemTemplate="{StaticResource TopicDataTemplate}">
-                    <toolkit:LongListSelector.GroupHeaderTemplate>
-                        <DataTemplate>
-                            <Border Margin="0 0 0 10" Background="{StaticResource PhoneAccentBrush}">
-                                <TextBlock Text="{Binding Title}" Foreground="White" Style="{StaticResource PhoneTextLargeStyle}"/>
-                            </Border>
-                        </DataTemplate>
-                    </toolkit:LongListSelector.GroupHeaderTemplate>
-                    <toolkit:LongListSelector.GroupItemTemplate>
-                        <DataTemplate>
-                            <Border Width="480" Height="60" Margin="0 0 0 10" Background="{StaticResource PhoneAccentBrush}">
-                                <TextBlock Text="{Binding Title}" Foreground="White" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                            </Border>
-                        </DataTemplate>
-                    </toolkit:LongListSelector.GroupItemTemplate>
-                    <toolkit:LongListSelector.GroupItemsPanel>
-                        <ItemsPanelTemplate>
-                            <toolkit:WrapPanel HorizontalAlignment="Stretch"/>
-                        </ItemsPanelTemplate>
-                    </toolkit:LongListSelector.GroupItemsPanel>
-                </toolkit:LongListSelector>
-            </controls:PivotItem>
-
-            <!--Pivot item two-->
-            <controls:PivotItem Header="热门版面">
-                <ListBox ItemsSource="{Binding HotboardsItems}" ItemTemplate="{StaticResource BoardDataTemplate}"
-                         SelectionChanged="Board_Selected">
+        <controls:Pivot LoadedPivotItem="Pivot_LoadedPivotItem" x:Name="MailboxPivot" Title="虎踞龙蟠BBS">
+            <controls:PivotItem Header="收件箱">
+                <ListBox ItemsSource="{Binding InboxItems}" ItemTemplate="{StaticResource MailDataTemplate}"
+                         SelectionChanged="Mail_Selected">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -85,13 +74,33 @@
                 </ListBox>
             </controls:PivotItem>
 
-            <controls:PivotItem Header="版面分区">
+            <controls:PivotItem Header="发件箱">
+                <ListBox ItemsSource="{Binding SentItems}" ItemTemplate="{StaticResource MailDataTemplate}"
+                         SelectionChanged="Mail_Selected">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </controls:PivotItem>
+
+            <controls:PivotItem Header="垃圾箱">
+                <ListBox ItemsSource="{Binding DeletedItems}" ItemTemplate="{StaticResource MailDataTemplate}"
+                         SelectionChanged="Mail_Selected">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/new.png" Text="新建"/>
             <shell:ApplicationBarIconButton Click="Refresh_Click" IconUri="/Images/refresh.png" Text="刷新"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

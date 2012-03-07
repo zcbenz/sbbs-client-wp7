@@ -125,6 +125,26 @@ namespace sbbs_client_wp7.Sbbs
             wc.DownloadStringAsync(uri, new ServiceArg<TopicViewModel>() { Callback = callback });
         }
 
+        // 邮箱内容
+        public void MailBox(int type, int start, int limit, Action<TopicCollection, bool, string> callback)
+        {
+            WebClient wc = new WebClient();
+            Uri uri = new Uri(apiBase + "mailbox/get" + apiPost + "?token=" + HttpUtility.UrlEncode(Token) + "&start=" + start + "&limit=" + limit + "&type=" + type);
+
+            wc.DownloadStringCompleted += DownloadedAndParse<TopicCollection, MailsResponse>;
+            wc.DownloadStringAsync(uri, new ServiceArg<TopicCollection>() { Callback = callback });
+        }
+
+        // 单封邮件
+        public void Mail(int type, int id, Action<TopicViewModel, bool, string> callback)
+        {
+            WebClient wc = new WebClient();
+            Uri uri = new Uri(apiBase + "mail/get" + apiPost + "?token=" + HttpUtility.UrlEncode(Token) + "&type=" + type + "&id=" + id);
+
+            wc.DownloadStringCompleted += DownloadedAndParse<TopicViewModel, MailResponse>;
+            wc.DownloadStringAsync(uri, new ServiceArg<TopicViewModel>() { Callback = callback });
+        }
+
         // 下载完成后分析JSON数据然后调用回调函数
         // C为返回类型，比如TopicCollection
         // R为JSON的Response类型

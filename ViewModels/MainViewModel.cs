@@ -104,7 +104,10 @@ namespace sbbs_client_wp7
         public CurrentBoardViewModel CurrentBoard { get; set; }
         // 当前话题
         public CurrentTopicViewModel CurrentTopic { get; set; }
+        // 热门页面
         public HotViewModel Hot { get; set; }
+        // 邮箱页面
+        public MailboxViewModel Mailbox { get; set; }
 
         // 是否已经登陆
         public bool IsLogin

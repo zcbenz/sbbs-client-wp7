@@ -63,6 +63,38 @@ namespace sbbs_client_wp7.Sbbs
             }
         }
     }
+    
+    // 返回邮件集合
+    [DataContract]
+    public class MailsResponse : Response, IResponse<ObservableCollection<TopicViewModel>>
+    {
+        [DataMember(Name = "mails")]
+        public ObservableCollection<TopicViewModel> mails;
+
+        public ObservableCollection<TopicViewModel> Root
+        {
+            get
+            {
+                return mails;
+            }
+        }
+    }
+
+    // 返回单封邮件
+    [DataContract]
+    public class MailResponse : Response, IResponse<TopicViewModel>
+    {
+        [DataMember(Name = "mail")]
+        public TopicViewModel mail;
+
+        public TopicViewModel Root
+        {
+            get
+            {
+                return mail;
+            }
+        }
+    }
 
     // 返回版面集合
     // 符合类型： 收藏夹

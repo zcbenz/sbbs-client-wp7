@@ -81,6 +81,9 @@
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MailboxPage.xaml.cs">
+      <DependentUpon>MailboxPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,7 @@
     <Compile Include="ViewModels\CurrentBoardViewModel.cs" />
     <Compile Include="ViewModels\CurrentTopicViewModel.cs" />
     <Compile Include="ViewModels\HotViewModel.cs" />
+    <Compile Include="ViewModels\MailboxViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\LoadingViewModel.cs" />
   </ItemGroup>
@@ -134,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MailboxPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

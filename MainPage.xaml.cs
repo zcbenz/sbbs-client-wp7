@@ -107,6 +107,12 @@ namespace sbbs_client_wp7
             NavigationService.Navigate(new Uri("/HotPage.xaml?type=2", UriKind.RelativeOrAbsolute));
         }
 
+        // 我的邮箱
+        private void Mail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/MailboxPage.xaml?type=0", UriKind.RelativeOrAbsolute));
+        }
+
         // 浏览历史
         private void History_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
