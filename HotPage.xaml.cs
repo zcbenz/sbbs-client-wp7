@@ -20,6 +20,7 @@ namespace sbbs_client_wp7
     public partial class HotPage : PhoneApplicationPage
     {
         private bool isHotTopicsLoading;
+        private bool isHotBoardsLoading;
 
         public HotPage()
         {
@@ -30,6 +31,7 @@ namespace sbbs_client_wp7
             DataContext = App.ViewModel.Hot;
         }
 
+        // 进入页面时根据参数切换到指定的页面
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -37,19 +39,13 @@ namespace sbbs_client_wp7
             if (NavigationContext.QueryString.ContainsKey("type"))
             {
                 int type = int.Parse(NavigationContext.QueryString["type"]);
-                switch (type)
-                {
-                    case 0:
-                        if (App.ViewModel.Hot.TopicsGroupItems == null)
-                            LoadHotTopics();
-                        break;
-                }
+                HotPivot.SelectedIndex = type;
             }
         }
 
         private void SetLoading()
         {
-            App.ViewModel.Hot.IsLoading = isHotTopicsLoading;
+            App.ViewModel.Hot.IsLoading = isHotTopicsLoading | isHotBoardsLoading;
         }
 
         private void LoadHotTopics()
@@ -77,6 +73,20 @@ namespace sbbs_client_wp7
             });
         }
 
+        private void LoadHotBoards()
+        {
+            isHotBoardsLoading = true;
+            SetLoading();
+            App.Service.HotBoards(delegate(ObservableCollection<BoardViewModel> boards, bool success, string error)
+            {
+                isHotBoardsLoading = false;
+                SetLoading();
+
+                if (boards != null)
+                    App.ViewModel.Hot.HotboardsItems = boards;
+            });
+        }
+
         private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 1)
@@ -94,9 +104,46 @@ namespace sbbs_client_wp7
             }
         }
 
+        private void Board_Selected(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 1)
+            {
+                // 清除选择，否则同样的项目无法点击第二次
+                (sender as ListBox).SelectedIndex = -1;
+                BoardViewModel board = e.AddedItems[0] as BoardViewModel;
+
+                this.NavigationService.Navigate(new Uri("/BoardPage.xaml?board=" + board.EnglishName + "&description=" + board.Description, UriKind.Relative));
+            }
+        }
+
+        // 刷新按钮
         private void Refresh_Click(object sender, EventArgs e)
         {
-            LoadHotTopics();
+            switch (HotPivot.SelectedIndex)
+            {
+                case 0:
+                    LoadHotTopics();
+                    break;
+                case 1:
+                    LoadHotBoards();
+                    break;
+            }
+        }
+
+        // 直到切换到页面时才只刷新必要的页面
+        private void Pivot_LoadedPivotItem(object sender, PivotItemEventArgs e)
+        {
+            switch ((sender as Pivot).SelectedIndex)
+            {
+                case 0:
+                    if (App.ViewModel.Hot.TopicsGroupItems == null)
+                        LoadHotTopics();
+                    break;
+                case 1:
+                    if (App.ViewModel.Hot.HotboardsItems == null)
+                        LoadHotBoards();
+                    break;
+            }
         }
     }
 }

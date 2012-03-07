@@ -104,6 +104,16 @@ namespace sbbs_client_wp7.Sbbs
             wc.DownloadStringAsync(uri, new ServiceArg<ObservableCollection<HotTopicsViewModel>>() { Callback = callback });
         }
 
+        // 热门版面
+        public void HotBoards(Action<BoardCollection, bool, string> callback)
+        {
+            WebClient wc = new WebClient();
+            Uri uri = new Uri(apiBase + "hot/boards" + apiPost);
+
+            wc.DownloadStringCompleted += DownloadedAndParse<BoardCollection, BoardsResponse>;
+            wc.DownloadStringAsync(uri, new ServiceArg<BoardCollection>() { Callback = callback });
+        }
+
         // 发帖
         public void TopicPost(string board, int reid, string title, string content, Action<TopicViewModel, bool, string> callback)
         {
