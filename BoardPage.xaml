@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:local="clr-namespace:sbbs_client_wp7"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -49,6 +50,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
@@ -58,20 +60,16 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel>
-                <ListBox ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource TopicDataTemplate}"
-                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                         SelectionChanged="Topic_Selected">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-                <Button Visibility="Collapsed" Margin="-12 0" x:Name="LoadMore" Content="载入更多" Click="LoadMore_Click"/>
-            </StackPanel>
-        </ScrollViewer>
+        <local:ExtendedListBox ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource TopicDataTemplate}"
+                               SelectionChanged="Topic_Selected"
+                               Grid.Row="1" Margin="12,0,12,0">
+            <local:ExtendedListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </local:ExtendedListBox.ItemContainerStyle>
+        </local:ExtendedListBox>
+        <Button Grid.Row="2" Visibility="Collapsed" Margin="-12 0" x:Name="LoadMore" Content="载入更多" Click="LoadMore_Click"/>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>

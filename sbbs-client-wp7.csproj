@@ -71,6 +71,7 @@
     <Compile Include="BoardSettingsPage.xaml.cs">
       <DependentUpon>BoardSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ExtendedListBox.cs" />
     <Compile Include="DynamicOrientationChanges\AnimateOrientationChangesFrame.cs" />
     <Compile Include="DynamicOrientationChanges\FadeOrientationChangesFrame.cs" />
     <Compile Include="DynamicOrientationChanges\HybridOrientationChangesFrame.cs" />
