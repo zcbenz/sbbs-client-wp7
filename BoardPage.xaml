@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:local="clr-namespace:sbbs_client_wp7"
+    xmlns:custom="clr-namespace:CustomControls"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,9 +20,7 @@
     toolkit:TiltEffect.IsTiltEnabled="True">
 
     <shell:SystemTray.ProgressIndicator>
-        <shell:ProgressIndicator Text="载入中..."
-            IsVisible="{Binding IsLoading}"
-            IsIndeterminate="{Binding IsLoading}"/>
+        <shell:ProgressIndicator Text="载入中..." IsVisible="{Binding IsLoading}" IsIndeterminate="{Binding IsLoading}"/>
     </shell:SystemTray.ProgressIndicator>
 
     <toolkit:TransitionService.NavigationInTransition>
@@ -60,16 +59,10 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <local:ExtendedListBox x:Name="TopicsList" ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource TopicDataTemplate}"
-                               SelectionChanged="TopicsList_Selected"
-                               NextPage="TopicsList_NextPage"
-                               Grid.Row="1" Margin="12,0,12,0">
-            <local:ExtendedListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </local:ExtendedListBox.ItemContainerStyle>
-        </local:ExtendedListBox>
+        <custom:ExtendedListBox x:Name="TopicsList" ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource TopicDataTemplate}"
+                                SelectionChanged="TopicsList_Selected"
+                                NextPage="TopicsList_NextPage"
+                                Grid.Row="1" Margin="12,0,12,0"/>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>

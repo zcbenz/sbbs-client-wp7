@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 namespace sbbs_client_wp7
 {
     using Sbbs;
+    using CustomControls;
 
     public partial class BoardPage : PhoneApplicationPage
     {
@@ -126,9 +127,6 @@ namespace sbbs_client_wp7
                         ++currentPage;
                         foreach (TopicViewModel topic in topics)
                             App.ViewModel.CurrentBoard.Topics.Add(topic);
-
-                        // 叠加完毕时往后翻页
-
                     }
                     else
                     {

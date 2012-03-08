@@ -12,40 +12,51 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.Windows.Controls.Primitives;
 using System.Collections;
+using System.Collections.Specialized;
 
-namespace sbbs_client_wp7
+namespace CustomControls
 {
     public class ExtendedListBox : ListBox
     {
         protected bool _isBouncy = false;
         private bool alreadyHookedScrollEvents = false;
 
-        TextBlock LoadMoreText;
-
-        // 属性：是否完全载入
-        public bool IsFullyLoaded
+        // 属性：底部提示文字
+        public TextBlock LoadMore
         {
-            get { return (bool)GetValue(IsFullyLoadedProperty); }
-            set { SetValue(IsFullyLoadedProperty, value); }
+            get { return base.GetValue(LoadMoreProperty) as TextBlock; }
+            set { base.SetValue(LoadMoreProperty, value); }
         }
 
-        public static readonly DependencyProperty IsFullyLoadedProperty =
-            DependencyProperty.Register("IsFullyLoaded", typeof(bool), typeof(ExtendedListBox), new PropertyMetadata(false));
+        public static readonly DependencyProperty LoadMoreProperty =
+            DependencyProperty.Register("LoadMore", typeof(TextBlock), typeof(ExtendedListBox), null);
+
+        // 属性：是否完全载入
+        public bool IsFullyLoaded { get; set; }
         
         // 事件：拖到边界处
         public delegate void OnNextPage(object sender, NextPageEventArgs e);
         public event OnNextPage NextPage;
 
+        // 当列表内无内容时隐藏文字
+        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
+        {
+            base.OnItemsChanged(e);
+            ApplyTemplate();
+
+            LoadMore.Visibility = (!IsFullyLoaded && Items.Count > 0) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
         public ExtendedListBox()
         {
+            DefaultStyleKey = typeof(ExtendedListBox);
             this.Loaded += new RoutedEventHandler(ListBox_Loaded);
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            LoadMoreText = (TextBlock)GetTemplateChild("LoadMoreText");
+            LoadMore = (TextBlock)GetTemplateChild("LoadMore");
         }
 
         private void ListBox_Loaded(object sender, RoutedEventArgs e)

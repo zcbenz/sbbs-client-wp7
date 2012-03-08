@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:custom="clr-namespace:CustomControls"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -64,54 +65,28 @@
         <!--Pivot Control-->
         <controls:Pivot LoadedPivotItem="Pivot_LoadedPivotItem" x:Name="MailboxPivot" Title="虎踞龙蟠BBS">
             <controls:PivotItem Header="收件箱">
-                <ScrollViewer>
-                    <StackPanel>
-                        <ListBox ItemsSource="{Binding InboxItems}" ItemTemplate="{StaticResource MailDataTemplate}"
-                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                 SelectionChanged="Mail_Selected">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
-                        </ListBox>
-                        <Button Visibility="Collapsed" Margin="-12 0" x:Name="LoadMore1" Content="载入更多" Click="LoadMore_Click"/>
-                    </StackPanel>
-                </ScrollViewer>
+                <custom:ExtendedListBox x:Name="InboxList"
+                                        ItemsSource="{Binding InboxItems}"
+                                        ItemTemplate="{StaticResource MailDataTemplate}"
+                                        SelectionChanged="Mail_Selected"
+                                        NextPage="BoxList_NextPage"/>
             </controls:PivotItem>
 
             <controls:PivotItem Header="发件箱">
-                <ScrollViewer>
-                    <StackPanel>
-                        <ListBox ItemsSource="{Binding SentItems}" ItemTemplate="{StaticResource MailDataTemplate}"
-                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                 SelectionChanged="Mail_Selected">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
-                        </ListBox>
-                        <Button Visibility="Collapsed" Margin="-12 0" x:Name="LoadMore2" Content="载入更多" Click="LoadMore_Click"/>
-                    </StackPanel>
-                </ScrollViewer>
+                <custom:ExtendedListBox x:Name="SentList"
+                                        ItemsSource="{Binding SentItems}"
+                                        ItemTemplate="{StaticResource MailDataTemplate}"
+                                        SelectionChanged="Mail_Selected"
+                                        NextPage="BoxList_NextPage"/>
             </controls:PivotItem>
 
             <controls:PivotItem Header="垃圾箱">
-                <ScrollViewer>
-                    <StackPanel>
-                        <ListBox ItemsSource="{Binding DeletedItems}" ItemTemplate="{StaticResource MailDataTemplate}"
-                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                 SelectionChanged="Mail_Selected">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
-                        </ListBox>
-                        <Button Visibility="Collapsed" Margin="-12 0" x:Name="LoadMore3" Content="载入更多" Click="LoadMore_Click"/>
-                    </StackPanel>
-                </ScrollViewer>
+                <custom:ExtendedListBox x:Name="DeletedList"
+                                        ItemsSource="{Binding DeletedItems}"
+                                        ItemTemplate="{StaticResource MailDataTemplate}"
+                                        SelectionChanged="Mail_Selected"
+                                        NextPage="BoxList_NextPage">
+                </custom:ExtendedListBox>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>

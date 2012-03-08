@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:custom="clr-namespace:CustomControls"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,13 +14,11 @@
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
-    shell:SystemTray.Opacity="{Binding IsLoaded, Converter={StaticResource LoadedOpacityConerter}}"
+    shell:SystemTray.Opacity="{Binding IsLoading, Converter={StaticResource LoadedOpacityConerter}, ConverterParameter=true}"
     d:DataContext="{d:DesignData SampleData/CurrentTopicViewModelSampleData.xaml}">
 
     <shell:SystemTray.ProgressIndicator>
-        <shell:ProgressIndicator Text="载入中..."
-            IsVisible="{Binding IsLoaded, Converter={StaticResource BoolReverseConverter}}"
-            IsIndeterminate="{Binding IsLoaded, Converter={StaticResource BoolReverseConverter}}"/>
+        <shell:ProgressIndicator Text="载入中..." IsVisible="{Binding IsLoading}" IsIndeterminate="{Binding IsLoading}"/>
     </shell:SystemTray.ProgressIndicator>
 
     <toolkit:TransitionService.NavigationInTransition>
@@ -77,21 +76,11 @@
                 <TextBlock x:Name="PageTitle" Text="{Binding Title}" Margin="0,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
             </ScrollViewer>
         </StackPanel>
-        
-        <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel>
-                <ListBox x:Name="TopicsList" ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource ContentDataTemplate}"
-                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                         SelectionChanged="ListBox_SelectionChanged">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-                <Button Visibility="Collapsed" toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12 0" x:Name="LoadMore" Content="载入更多" Click="LoadMore_Click"/>
-            </StackPanel>
-        </ScrollViewer>
+
+        <custom:ExtendedListBox Grid.Row="1" Margin="12,0,12,0"
+                                x:Name="TopicsList" ItemsSource="{Binding Topics}" ItemTemplate="{StaticResource ContentDataTemplate}"
+                                SelectionChanged="TopicsList_SelectionChanged"
+                                NextPage="TopicsList_NextPage"/>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>

@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 namespace sbbs_client_wp7
 {
     using Sbbs;
+    using CustomControls;
 
     public partial class TopicPage : PhoneApplicationPage
     {
@@ -25,39 +26,6 @@ namespace sbbs_client_wp7
             InitializeComponent();
 
             DataContext = App.ViewModel.CurrentTopic;
-        }
-
-        private void LoadMore_Click(object sender, RoutedEventArgs e)
-        {
-            App.ViewModel.CurrentTopic.IsLoaded = false;
-            LoadMore.IsEnabled = false;
-            App.Service.Topic(App.ViewModel.CurrentTopic.Board, App.ViewModel.CurrentTopic.Id, (currentPage + 1) * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
-            {
-                // 判断后面是否还有内容
-                if (error == null && topics.Count < pageSize)
-                {
-                    LoadMore.Visibility = Visibility.Collapsed;
-                    LoadMore.IsEnabled = false;
-                }
-                else
-                {
-                    LoadMore.Visibility = Visibility.Visible;
-                    LoadMore.IsEnabled = true;
-                }
-
-                App.ViewModel.CurrentTopic.IsLoaded = true;
-                if (error == null)
-                {
-                    currentPage++;
-
-                    foreach (TopicViewModel topic in topics)
-                        App.ViewModel.CurrentTopic.Topics.Add(topic);
-                }
-                else
-                {
-                    MessageBox.Show("网络错误");
-                }
-            });
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -109,32 +77,45 @@ namespace sbbs_client_wp7
             NavigationService.Navigate(new Uri("/PostPage.xaml?title=" + HttpUtility.UrlEncode(topic.Title) + "&board=" + topic.Board + "&reid=" + topic.Id, UriKind.Relative));
         }
 
-        private void LoadTopics()
+        private void TopicsList_NextPage(object sendor, NextPageEventArgs e)
         {
-            App.ViewModel.CurrentTopic.IsLoaded = false;
-            LoadMore.IsEnabled = false;
+            LoadTopics(true);
+        }
+
+        private void LoadTopics(bool append = false)
+        {
+            if (App.ViewModel.CurrentTopic.IsLoading)
+                return;
+
+            App.ViewModel.CurrentTopic.IsLoading = true;
 
             // 重新加载
-            App.Service.Topic(App.ViewModel.CurrentTopic.Board, App.ViewModel.CurrentTopic.Id, currentPage * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
+            int page = append ? currentPage + 1 : currentPage;
+            App.Service.Topic(App.ViewModel.CurrentTopic.Board, App.ViewModel.CurrentTopic.Id, page * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
             {
-                if (error == null && topics.Count < pageSize)
-                {
-                    LoadMore.Visibility = Visibility.Collapsed;
-                    LoadMore.IsEnabled = false;
-                }
-                else
-                {
-                    LoadMore.Visibility = Visibility.Visible;
-                    LoadMore.IsEnabled = true;
-                }
+                App.ViewModel.CurrentTopic.IsLoading = false;
 
-                App.ViewModel.CurrentTopic.IsLoaded = true;
+                // 判断后面是否还有内容
+                TopicsList.IsFullyLoaded = error == null && topics.Count < pageSize;
+
                 if (error == null)
-                    App.ViewModel.CurrentTopic.Topics = topics;
+                    // 重置还是添加
+                    if (append)
+                    {
+                        ++currentPage;
+                        foreach (TopicViewModel topic in topics)
+                            App.ViewModel.CurrentTopic.Topics.Add(topic);
+                    }
+                    else
+                    {
+                        App.ViewModel.CurrentTopic.Topics = topics;
+                    }
+                else
+                    MessageBox.Show("网络错误");
             });
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TopicsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((sender as ListBox).SelectedIndex == 0)
                 (sender as ListBox).SelectedIndex = -1;

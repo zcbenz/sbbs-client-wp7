@@ -17,7 +17,7 @@ namespace sbbs_client_wp7
         int id;
         private string board;
         private string title;
-        private bool isLoaded;
+        private bool isLoading;
         private ObservableCollection<TopicViewModel> topics;
 
         public int Id
@@ -84,18 +84,18 @@ namespace sbbs_client_wp7
             }
         }
 
-        public bool IsLoaded
+        public bool IsLoading
         {
             get
             {
-                return isLoaded;
+                return isLoading;
             }
             set
             {
-                if (isLoaded != value)
+                if (isLoading != value)
                 {
-                    isLoaded = value;
-                    NotifyPropertyChanged("IsLoaded");
+                    isLoading = value;
+                    NotifyPropertyChanged("IsLoading");
                 }
             }
         }

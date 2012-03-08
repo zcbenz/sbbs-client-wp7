@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 namespace sbbs_client_wp7
 {
     using Sbbs;
+    using CustomControls;
 
     public partial class MailboxPage : PhoneApplicationPage
     {
@@ -28,8 +29,8 @@ namespace sbbs_client_wp7
             App.ViewModel.Mailbox.IsLoading = isLoading[0] | isLoading[1] | isLoading[2];
         }
 
-        // 载入按钮集合
-        Button[] LoadMore = { null, null, null };
+        // 列表集合
+        ExtendedListBox[] List = { null, null, null };
 
         public MailboxPage()
         {
@@ -40,9 +41,9 @@ namespace sbbs_client_wp7
 
             DataContext = App.ViewModel.Mailbox;
 
-            LoadMore[0] = LoadMore1;
-            LoadMore[1] = LoadMore2;
-            LoadMore[2] = LoadMore3;
+            List[0] = InboxList;
+            List[1] = SentList;
+            List[2] = DeletedList;
         }
 
         // 进入页面时根据参数切换到指定的页面
@@ -144,16 +145,7 @@ namespace sbbs_client_wp7
                     }
 
                     // 判断是否显示下一页
-                    if (mails.Count < pageSize)
-                    {
-                        LoadMore[type].Visibility = Visibility.Collapsed;
-                        LoadMore[type].IsEnabled = false;
-                    }
-                    else
-                    {
-                        LoadMore[type].Visibility = Visibility.Visible;
-                        LoadMore[type].IsEnabled = true;
-                    }
+                    List[type].IsFullyLoaded = mails.Count < pageSize;
                 }
             });
         }
@@ -165,8 +157,8 @@ namespace sbbs_client_wp7
             LoadMailbox(MailboxPivot.SelectedIndex);
         }
 
-        // 载入更多
-        private void LoadMore_Click(object sender, RoutedEventArgs e)
+        // 载入下一页
+        private void BoxList_NextPage(object sendor, NextPageEventArgs e)
         {
             LoadMailbox(MailboxPivot.SelectedIndex, true);
         }
