@@ -82,40 +82,12 @@ namespace sbbs_client_wp7
             }
         }
 
-        private void LoadMore_Click(object sender, RoutedEventArgs e)
+        private void TopicsList_NextPage(object sendor, NextPageEventArgs e)
         {
-            App.ViewModel.CurrentBoard.IsLoaded = false;
-            LoadMore.IsEnabled = false;
-            App.Service.Board(App.ViewModel.CurrentBoard.EnglishName, (currentPage + 1)* pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
-            {
-                // 判断后面是否还有内容
-                if (error == null && topics.Count < pageSize)
-                {
-                    LoadMore.Visibility = Visibility.Collapsed;
-                    LoadMore.IsEnabled = false;
-                }
-                else
-                {
-                    LoadMore.Visibility = Visibility.Visible;
-                    LoadMore.IsEnabled = true;
-                }
-
-                App.ViewModel.CurrentBoard.IsLoaded = true;
-                if (error == null)
-                {
-                    currentPage++;
-
-                    foreach (TopicViewModel topic in topics)
-                        App.ViewModel.CurrentBoard.Topics.Add(topic);
-                }
-                else
-                {
-                    MessageBox.Show("网络错误");
-                }
-            });
+            LoadTopics(true);
         }
 
-        private void Topic_Selected(object sender, SelectionChangedEventArgs e)
+        private void TopicsList_Selected(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 1)
             {
@@ -131,29 +103,39 @@ namespace sbbs_client_wp7
             }
         }
 
-        private void LoadTopics()
+        private void LoadTopics(bool append = false)
         {
-            LoadMore.IsEnabled = false;
-            App.ViewModel.CurrentBoard.IsLoaded = false;
+            if (App.ViewModel.CurrentBoard.IsLoading)
+                return;
+
+            App.ViewModel.CurrentBoard.IsLoading = true;
 
             // 重新加载
-            App.Service.Board(App.ViewModel.CurrentBoard.EnglishName, currentPage * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
+            int page = append ? currentPage + 1 : currentPage;
+            App.Service.Board(App.ViewModel.CurrentBoard.EnglishName, page * pageSize, pageSize, delegate(ObservableCollection<TopicViewModel> topics, bool success, string error)
             {
-                // 判断后面是否还有内容
-                if (error == null && topics.Count < pageSize)
-                {
-                    LoadMore.Visibility = Visibility.Collapsed;
-                    LoadMore.IsEnabled = false;
-                }
-                else
-                {
-                    LoadMore.Visibility = Visibility.Visible;
-                    LoadMore.IsEnabled = true;
-                }
+                App.ViewModel.CurrentBoard.IsLoading = false;
 
-                App.ViewModel.CurrentBoard.IsLoaded = true;
+                // 判断后面是否还有内容
+                TopicsList.IsFullyLoaded = error == null && topics.Count < pageSize;
+
                 if (error == null)
-                    App.ViewModel.CurrentBoard.Topics = topics;
+                    // 重置还是添加
+                    if (append)
+                    {
+                        ++currentPage;
+                        foreach (TopicViewModel topic in topics)
+                            App.ViewModel.CurrentBoard.Topics.Add(topic);
+
+                        // 叠加完毕时往后翻页
+
+                    }
+                    else
+                    {
+                        App.ViewModel.CurrentBoard.Topics = topics;
+                    }
+                else
+                    MessageBox.Show("网络错误");
             });
         }
     }

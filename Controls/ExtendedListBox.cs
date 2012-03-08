@@ -20,9 +20,32 @@ namespace sbbs_client_wp7
         protected bool _isBouncy = false;
         private bool alreadyHookedScrollEvents = false;
 
+        TextBlock LoadMoreText;
+
+        // 属性：是否完全载入
+        public bool IsFullyLoaded
+        {
+            get { return (bool)GetValue(IsFullyLoadedProperty); }
+            set { SetValue(IsFullyLoadedProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsFullyLoadedProperty =
+            DependencyProperty.Register("IsFullyLoaded", typeof(bool), typeof(ExtendedListBox), new PropertyMetadata(false));
+        
+        // 事件：拖到边界处
+        public delegate void OnNextPage(object sender, NextPageEventArgs e);
+        public event OnNextPage NextPage;
+
         public ExtendedListBox()
         {
             this.Loaded += new RoutedEventHandler(ListBox_Loaded);
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            LoadMoreText = (TextBlock)GetTemplateChild("LoadMoreText");
         }
 
         private void ListBox_Loaded(object sender, RoutedEventArgs e)
@@ -54,28 +77,14 @@ namespace sbbs_client_wp7
  
         }
 
-        public delegate void OnCompression(object sender, CompressionEventArgs e);
-        public event OnCompression Compression;
-
         private void hgroup_CurrentStateChanging(object sender, VisualStateChangedEventArgs e)
         {
             if (e.NewState.Name == "CompressionLeft")
-            {
                 _isBouncy = true;
-                if (Compression != null)
-                    Compression(this, new CompressionEventArgs(CompressionType.Left));
-            }
-
-            if (e.NewState.Name == "CompressionRight")
-            {
+            else if (e.NewState.Name == "CompressionRight")
                 _isBouncy = true;
-                if (Compression != null)
-                    Compression(this, new CompressionEventArgs(CompressionType.Right));
-            }
-            if (e.NewState.Name == "NoHorizontalCompression")
-            {
+            else if (e.NewState.Name == "NoHorizontalCompression")
                 _isBouncy = false;
-            }
         }
 
         private void vgroup_CurrentStateChanging(object sender, VisualStateChangedEventArgs e)
@@ -83,16 +92,14 @@ namespace sbbs_client_wp7
             if (e.NewState.Name == "CompressionTop")
             {
                 _isBouncy = true;
-                if (Compression != null)
-                    Compression(this, new CompressionEventArgs(CompressionType.Top));
             }
-            if (e.NewState.Name == "CompressionBottom")
+            else if (e.NewState.Name == "CompressionBottom")
             {
                 _isBouncy = true;
-                if (Compression != null)
-                    Compression(this, new CompressionEventArgs(CompressionType.Bottom));
+                if (NextPage != null && !IsFullyLoaded)
+                    NextPage(this, new NextPageEventArgs());
             }
-            if (e.NewState.Name == "NoVerticalCompression")
+            else if (e.NewState.Name == "NoVerticalCompression")
                 _isBouncy = false;
         }
 
@@ -138,15 +145,7 @@ namespace sbbs_client_wp7
         }
     }
 
-    public class CompressionEventArgs : EventArgs
+    public class NextPageEventArgs : EventArgs
     {
-        public CompressionType Type { get; protected set; }
-
-        public CompressionEventArgs(CompressionType type)
-        {
-            Type = type;
-        }
     }
-
-    public enum CompressionType { Top, Bottom, Left, Right };
 }

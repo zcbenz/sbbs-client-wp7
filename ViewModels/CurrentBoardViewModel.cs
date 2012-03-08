@@ -16,7 +16,7 @@ namespace sbbs_client_wp7
     {
         private string name;
         private string description;
-        private bool isLoaded;
+        private bool isLoading;
         private ObservableCollection<TopicViewModel> topics;
 
         // 全局变量，用于标记跳转到版面时是否需要刷新
@@ -70,18 +70,18 @@ namespace sbbs_client_wp7
             }
         }
 
-        public bool IsLoaded
+        public bool IsLoading
         {
             get
             {
-                return isLoaded;
+                return isLoading;
             }
             set
             {
-                if (isLoaded != value)
+                if (isLoading != value)
                 {
-                    isLoaded = value;
-                    NotifyPropertyChanged("IsLoaded");
+                    isLoading = value;
+                    NotifyPropertyChanged("IsLoading");
                 }
             }
         }
