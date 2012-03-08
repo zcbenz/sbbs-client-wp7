@@ -72,6 +72,7 @@
       <DependentUpon>BoardSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ExtendedListBox.cs" />
+    <Compile Include="Controls\RecursiveListBox.cs" />
     <Compile Include="Controls\UIPropertyMetadata.cs" />
     <Compile Include="DynamicOrientationChanges\AnimateOrientationChangesFrame.cs" />
     <Compile Include="DynamicOrientationChanges\FadeOrientationChangesFrame.cs" />

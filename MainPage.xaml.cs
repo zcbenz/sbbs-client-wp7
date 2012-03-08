@@ -123,27 +123,9 @@ namespace sbbs_client_wp7
         {
             if (e.AddedItems.Count == 1)
             {
-                ListBox list = sender as ListBox;
                 BoardViewModel board = e.AddedItems[0] as BoardViewModel;
-
-                // 收藏夹目录
-                if (board.Leaf != true && board.EnglishName != "..")
-                {
-                    App.ViewModel.FavoratesDirectory.AddLast(App.ViewModel.FavoratesItems);
-                    App.ViewModel.FavoratesItems = board.Boards;
-                    return;
-                }
-                else if (board.EnglishName == "..")
-                {
-                    App.ViewModel.FavoratesItems = App.ViewModel.FavoratesDirectory.Last.Value;
-                    App.ViewModel.FavoratesDirectory.RemoveLast();
-                    return;
-                }
-
+                
                 this.NavigationService.Navigate(new Uri("/BoardPage.xaml?board=" + board.EnglishName + "&description=" + board.Description, UriKind.Relative));
-
-                // 清除选择，否则同样的项目无法点击第二次
-                (sender as ListBox).SelectedIndex = -1;
             }
         }
 
@@ -174,7 +156,6 @@ namespace sbbs_client_wp7
                     if (error != null)
                         return;
 
-                    App.ViewModel.FavoratesDirectory.Clear();
                     App.ViewModel.FavoratesItems = boards;
                 });
             }

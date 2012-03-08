@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
 
-namespace sbbs_client_wp7.Sbbs
+namespace Sbbs
 {
     [DataContract(Name = "topic")]
     public class TopicViewModel : INotifyPropertyChanged

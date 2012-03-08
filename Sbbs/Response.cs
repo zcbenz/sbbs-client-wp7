@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Collections.ObjectModel;
 
-namespace sbbs_client_wp7.Sbbs
+namespace Sbbs
 {
     // 服务器响应通常会包括一个字段作为返回值，该返回值字段名通常不定，
     // 因此响应DataContract子类需要自己手动定义哪个字段是返回值字段

@@ -6,13 +6,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.Windows.Controls.Primitives;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Windows.Media;
 
 namespace CustomControls
 {

@@ -2,7 +2,8 @@
     x:Class="sbbs_client_wp7.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:local="clr-namespace:sbbs_client_wp7"
-    xmlns:sbbs="clr-namespace:sbbs_client_wp7.Sbbs"
+    xmlns:custom="clr-namespace:CustomControls"
+    xmlns:sbbs="clr-namespace:Sbbs"
     xmlns:motion="clr-namespace:MetroInMotionUtils"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -76,15 +77,8 @@
             <controls:PanoramaItem.Header>
                 <TextBlock motion:MetroInMotion.Tilt="6" Tap="RefreshFavorates_Tap" Text="收藏夹" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
             </controls:PanoramaItem.Header>
-            <ListBox ItemsSource="{Binding FavoratesItems}" ItemTemplate="{StaticResource BoardDataTemplate}"
-                        SelectionChanged="Favorates_Selected"
-                        CacheMode="BitmapCache">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
+            <custom:RecursiveListBox ItemsSource="{Binding FavoratesItems}" ItemTemplate="{StaticResource BoardDataTemplate}"
+                                     LeafItemTap="Favorates_Selected"/>
         </controls:PanoramaItem>
             
         <!-- 我的账户 -->

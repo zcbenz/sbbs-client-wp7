@@ -52,7 +52,7 @@
             </ScrollViewer>
         </StackPanel>
 
-        <ScrollViewer x:Name="Content" Visibility="Collapsed" Grid.Row="1" Margin="12,0,12,0">
+        <ScrollViewer x:Name="MailContent" Visibility="Collapsed" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock Text="{Binding Content}" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeMedium}" />
         </ScrollViewer>
         <toolkit:PerformanceProgressBar x:Name="LoadProgress" IsIndeterminate="True" Grid.Row="1" />

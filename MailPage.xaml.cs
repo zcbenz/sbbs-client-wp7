@@ -39,7 +39,7 @@ namespace sbbs_client_wp7
                 {
                     LoadProgress.Visibility = Visibility.Collapsed;
                     LoadProgress.IsIndeterminate = false;
-                    Content.Visibility = Visibility.Visible;
+                    MailContent.Visibility = Visibility.Visible;
                     if (mail != null)
                         App.ViewModel.Mail.Content = mail.Content;
                 });
