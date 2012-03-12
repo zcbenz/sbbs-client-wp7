@@ -41,6 +41,16 @@ namespace Sbbs
             wc.DownloadStringAsync(uri, new ServiceArg<string>() { Callback = callback });
         }
 
+        // 全部版面
+        public void Sections(Action<BoardCollection, bool, string> callback)
+        {
+            WebClient wc = new WebClient();
+            Uri uri = new Uri(apiBase + "sections" + apiPost + "?up=1&token=" + HttpUtility.UrlEncode(Token));
+
+            wc.DownloadStringCompleted += DownloadedAndParse<BoardCollection, BoardsResponse>;
+            wc.DownloadStringAsync(uri, new ServiceArg<BoardCollection>() { Callback = callback });
+        }
+
         // 获取十大
         public void Topten(Action<TopicCollection, bool, string> callback)
         {

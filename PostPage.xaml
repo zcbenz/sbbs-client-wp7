@@ -66,7 +66,7 @@
             <TextBlock Text="标题" Style="{StaticResource PhoneTextGroupHeaderStyle}" />
             <TextBox x:Name="TitleText" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="1" />
             <TextBlock Text="内容" Grid.Row="2" Style="{StaticResource PhoneTextGroupHeaderStyle}" />
-            <TextBox x:Name="ContentText" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="3" />
+            <TextBox x:Name="ContentText" TextWrapping="Wrap" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="3" />
         </Grid>
     </Grid>
  

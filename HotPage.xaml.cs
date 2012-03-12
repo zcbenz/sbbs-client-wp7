@@ -21,6 +21,7 @@ namespace sbbs_client_wp7
     {
         private bool isHotTopicsLoading;
         private bool isHotBoardsLoading;
+        private bool isSectionsLoading;
 
         public HotPage()
         {
@@ -45,7 +46,37 @@ namespace sbbs_client_wp7
 
         private void SetLoading()
         {
-            App.ViewModel.Hot.IsLoading = isHotTopicsLoading | isHotBoardsLoading;
+            App.ViewModel.Hot.IsLoading = isHotTopicsLoading | isHotBoardsLoading | isSectionsLoading;
+        }
+
+        private void LoadSections(bool force = false)
+        {
+            if (!force)
+            {
+                // 先从本地缓存载入
+                ObservableCollection<BoardViewModel> sections = LocalCache.Get<ObservableCollection<BoardViewModel>>("sections");
+                if (sections != null)
+                {
+                    App.ViewModel.Hot.SectionItems = sections;
+                    return;
+                }
+            }
+
+            // 没有的话再从网络读取
+            isSectionsLoading = true;
+            SetLoading();
+            App.Service.Sections(delegate(ObservableCollection<BoardViewModel> boards, bool success, string error)
+            {
+                isSectionsLoading = false;
+                SetLoading();
+
+                if (boards != null)
+                {
+                    // 写入缓存
+                    LocalCache.Set<ObservableCollection<BoardViewModel>>("sections", boards);
+                    App.ViewModel.Hot.SectionItems = boards;
+                }
+            });
         }
 
         private void LoadHotTopics()
@@ -110,8 +141,17 @@ namespace sbbs_client_wp7
             {
                 // 清除选择，否则同样的项目无法点击第二次
                 (sender as ListBox).SelectedIndex = -1;
-                BoardViewModel board = e.AddedItems[0] as BoardViewModel;
 
+                BoardViewModel board = e.AddedItems[0] as BoardViewModel;
+                this.NavigationService.Navigate(new Uri("/BoardPage.xaml?board=" + board.EnglishName + "&description=" + board.Description, UriKind.Relative));
+            }
+        }
+
+        private void Section_Selected(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 1)
+            {
+                BoardViewModel board = e.AddedItems[0] as BoardViewModel;
                 this.NavigationService.Navigate(new Uri("/BoardPage.xaml?board=" + board.EnglishName + "&description=" + board.Description, UriKind.Relative));
             }
         }
@@ -126,6 +166,9 @@ namespace sbbs_client_wp7
                     break;
                 case 1:
                     LoadHotBoards();
+                    break;
+                case 2:
+                    LoadSections(true);
                     break;
             }
         }
@@ -142,6 +185,10 @@ namespace sbbs_client_wp7
                 case 1:
                     if (App.ViewModel.Hot.HotboardsItems == null)
                         LoadHotBoards();
+                    break;
+                case 2:
+                    if (App.ViewModel.Hot.SectionItems == null)
+                        LoadSections();
                     break;
             }
         }

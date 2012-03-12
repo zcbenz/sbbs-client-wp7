@@ -26,6 +26,24 @@ namespace sbbs_client_wp7
             }
         }
 
+        // 全部分区
+        private ObservableCollection<BoardViewModel> sectionItems;
+        public ObservableCollection<BoardViewModel> SectionItems
+        {
+            get
+            {
+                return sectionItems;
+            }
+            set
+            {
+                if (value != sectionItems)
+                {
+                    sectionItems = value;
+                    NotifyPropertyChanged("SectionItems");
+                }
+            }
+        }
+
         // 热门版面集合
         private ObservableCollection<BoardViewModel> hotboardsItems;
         public ObservableCollection<BoardViewModel> HotboardsItems
