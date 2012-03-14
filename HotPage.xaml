@@ -44,6 +44,18 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
+    
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="SimpleTopicDataTemplate">
+            <StackPanel Orientation="Vertical" Margin="-12 0 0 10">
+                <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Foreground="{Binding Unread, Converter={StaticResource BoolAccentConverter}}" TextWrapping="Wrap" Text="{Binding Title}"/>
+                <Grid>
+                    <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Author}"/>
+                    <TextBlock HorizontalAlignment="Right" Margin="0" Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Board}"/>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -51,7 +63,7 @@
         <controls:Pivot x:Name="HotPivot" LoadedPivotItem="Pivot_LoadedPivotItem" Title="虎踞龙蟠BBS">
             <!--Pivot item one-->
             <controls:PivotItem Header="分区热点">
-                <toolkit:LongListSelector SelectionChanged="LongListSelector_SelectionChanged" ItemsSource="{Binding TopicsGroupItems}" ItemTemplate="{StaticResource TopicDataTemplate}">
+                <toolkit:LongListSelector SelectionChanged="LongListSelector_SelectionChanged" ItemsSource="{Binding TopicsGroupItems}" ItemTemplate="{StaticResource SimpleTopicDataTemplate}">
                     <toolkit:LongListSelector.GroupHeaderTemplate>
                         <DataTemplate>
                             <Border Margin="0 0 0 10" Background="{StaticResource PhoneAccentBrush}">
