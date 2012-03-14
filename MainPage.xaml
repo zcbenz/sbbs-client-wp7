@@ -101,7 +101,7 @@
                 <local:Tile Title="站内信" Tap="Mail_Tap" Src="/Images/Tiles/mailbox.png" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
                 <!--<local:Tile Title="搜索" Src="/Images/Tiles/search.png"/>-->
                 <local:Tile Title="注册" Src="/Images/Tiles/cup.png" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
-                <local:Tile Title="关于" Src="/Images/Tiles/love.png"/>
+                <local:Tile Title="关于" Tap="About_Tap" Src="/Images/Tiles/love.png"/>
                 <local:Tile Title="退出" Src="/Images/Tiles/pen.png" Tap="Logout_Tap"  Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
             </toolkit:WrapPanel>
         </controls:PanoramaItem>

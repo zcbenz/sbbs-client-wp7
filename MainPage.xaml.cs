@@ -118,6 +118,12 @@ namespace sbbs_client_wp7
         {
         }
 
+        // 关于
+        private void About_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.RelativeOrAbsolute));
+        }
+
         // 点击收藏夹
         private void Favorates_Selected(object sender, SelectionChangedEventArgs e)
         {

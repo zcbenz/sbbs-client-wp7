@@ -31,7 +31,7 @@ namespace CustomControls
             if (e.AddedItems.Count == 1)
             {
                 // 清除选择
-                (sender as ListBox).SelectedIndex = -1;
+                SelectedIndex = -1;
 
                 ElementType board = e.AddedItems[0] as ElementType;
                 if (board.Leaf && LeafItemTap != null)
