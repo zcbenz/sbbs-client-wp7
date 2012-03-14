@@ -61,12 +61,6 @@ namespace sbbs_client_wp7
             }
         }
 
-        // 登录
-        private void Login_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
-        }
-
         // 注销
         private void Logout_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -88,46 +82,10 @@ namespace sbbs_client_wp7
             App.ViewModel.IsFavoratesLoaded = false;
             LoadFavorates();
         }
-
-        // 分区热点
-        private void HotTopics_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        
+        private void Tile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/HotPage.xaml?type=0", UriKind.RelativeOrAbsolute));
-        }
-
-        // 热门版面
-        private void HotBoards_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/HotPage.xaml?type=1", UriKind.RelativeOrAbsolute));
-        }
-
-        // 版面分区
-        private void Sections_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/HotPage.xaml?type=2", UriKind.RelativeOrAbsolute));
-        }
-
-        // 我的邮箱
-        private void Mail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/MailboxPage.xaml?type=0", UriKind.RelativeOrAbsolute));
-        }
-
-        // 搜索
-        private void Search_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.RelativeOrAbsolute));
-        }
-
-        // 浏览历史
-        private void History_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-        }
-
-        // 关于
-        private void About_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.RelativeOrAbsolute));
+            NavigationService.Navigate(new Uri("/" + (sender as Tile).Tag, UriKind.Relative));
         }
 
         // 点击收藏夹
@@ -159,7 +117,6 @@ namespace sbbs_client_wp7
         // 载入收藏夹
         private void LoadFavorates()
         {
-            MessageBox.Show("IsLogin: " + App.ViewModel.IsLogin);
             // 登录时载入收藏夹，未登陆时清空
             if (App.ViewModel.IsLogin)
             {

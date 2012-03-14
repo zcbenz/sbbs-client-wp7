@@ -41,7 +41,7 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="虎踞龙蟠BBS">
+        <controls:Pivot x:Name="LoginPivot" Title="虎踞龙蟠BBS">
             <!--Pivot item one-->
             <controls:PivotItem Header="登录">
                 <StackPanel>
@@ -64,7 +64,9 @@
 
             <!--Pivot item two-->
             <controls:PivotItem Header="注册">
-                <Grid/>
+                <ScrollViewer>
+                    <TextBlock Text="未完成" HorizontalAlignment="Center" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                </ScrollViewer>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>

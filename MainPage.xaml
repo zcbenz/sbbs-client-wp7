@@ -77,8 +77,14 @@
             <controls:PanoramaItem.Header>
                 <TextBlock motion:MetroInMotion.Tilt="6" Tap="RefreshFavorates_Tap" Text="收藏夹" Foreground="{StaticResource PhoneAccentBrush}" FontSize="60"/>
             </controls:PanoramaItem.Header>
-            <custom:RecursiveListBox ItemsSource="{Binding FavoratesItems}" ItemTemplate="{StaticResource BoardDataTemplate}"
-                                     LeafItemTap="Favorates_Selected"/>
+            <Grid>
+                <custom:RecursiveListBox ItemsSource="{Binding FavoratesItems}" ItemTemplate="{StaticResource BoardDataTemplate}"
+                                         Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"
+                                         LeafItemTap="Favorates_Selected"/>
+                <TextBlock Text="请在登录后使用收藏夹"
+                           Opacity="0.7" FontSize="{StaticResource PhoneFontSizeLarge}"
+                           Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=true}"/>
+            </Grid>
         </controls:PanoramaItem>
             
         <!-- 我的账户 -->
@@ -93,16 +99,16 @@
                     </Style>
                 </toolkit:WrapPanel.Resources>
 
-                <local:Tile Title="分区热点" Tap="HotTopics_Tap" Src="/Images/Tiles/board.png"/>
-                <local:Tile Title="热门版面" Tap="HotBoards_Tap" Src="/Images/Tiles/list.png"/>
-                <local:Tile Title="版面分区" Tap="Sections_Tap" Src="/Images/Tiles/folder.png"/>
+                <local:Tile Title="分区热点" Tag="HotPage.xaml?type=0" Tap="Tile_Tap" Src="/Images/Tiles/board.png"/>
+                <local:Tile Title="热门版面" Tag="HotPage.xaml?type=1" Tap="Tile_Tap" Src="/Images/Tiles/list.png"/>
+                <local:Tile Title="版面分区" Tag="HotPage.xaml?type=2" Tap="Tile_Tap" Src="/Images/Tiles/folder.png"/>
                 <!--<local:Tile Title="最近浏览" Tap="History_Tap" Src="/Images/Tiles/history.png"/>-->
-                <local:Tile Title="站内信" Tap="Mail_Tap" Src="/Images/Tiles/mailbox.png" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
+                <local:Tile Title="站内信" Tag="MailboxPage.xaml?type=0" Tap="Tile_Tap" Src="/Images/Tiles/mailbox.png" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
                 <!--<local:Tile Title="搜索" Tap="Search_Tap" Src="/Images/Tiles/search.png"/>-->
-                <local:Tile Title="关于" Tap="About_Tap" Src="/Images/Tiles/love.png"/>
-                <local:Tile Title="登录" Src="/Images/Tiles/pen.png" Tap="Login_Tap" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
-                <local:Tile Title="注册" Src="/Images/Tiles/cup.png" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
-                <local:Tile Title="退出" Src="/Images/Tiles/pen.png" Tap="Logout_Tap"  Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
+                <local:Tile Title="关于" Tag="AboutPage.xaml" Tap="Tile_Tap" Src="/Images/Tiles/love.png"/>
+                <local:Tile Title="登录" Tag="LoginPage.xaml" Src="/Images/Tiles/pen.png" Tap="Tile_Tap" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                <local:Tile Title="注册" Tag="LoginPage.xaml?reg=1" Src="/Images/Tiles/cup.png" Tap="Tile_Tap" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}, ConverterParameter=True}"/>
+                <local:Tile Title="退出" Src="/Images/Tiles/pen.png" Tap="Logout_Tap" Visibility="{Binding IsLogin, Converter={StaticResource BoolVisibleConverter}}"/>
             </toolkit:WrapPanel>
         </controls:PanoramaItem>
     </controls:Panorama>

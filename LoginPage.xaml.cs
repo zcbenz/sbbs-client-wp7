@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.Windows.Navigation;
 
 namespace sbbs_client_wp7
 {
@@ -20,6 +21,16 @@ namespace sbbs_client_wp7
             InitializeComponent();
 
             DataContext = App.ViewModel;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (NavigationContext.QueryString.ContainsKey("reg"))
+            {
+                LoginPivot.SelectedIndex = 1;
+            }
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
