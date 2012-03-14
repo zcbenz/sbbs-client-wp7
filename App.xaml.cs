@@ -92,8 +92,9 @@ namespace sbbs_client_wp7
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            // 载入上一次的数据状态
-            ViewModel.ToptenItems = LocalCache.Get<ObservableCollection<TopicViewModel>>("Topten");
+            // 从缓存中载入收藏夹和十大
+            App.ViewModel.FavoratesItems = LocalCache.Get<ObservableCollection<BoardViewModel>>("Favorates");
+            App.ViewModel.ToptenItems = LocalCache.Get<ObservableCollection<TopicViewModel>>("Topten");
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -106,14 +107,12 @@ namespace sbbs_client_wp7
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            LocalCache.Set<ObservableCollection<TopicViewModel>>("Topten", ViewModel.ToptenItems);
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            LocalCache.Set<ObservableCollection<TopicViewModel>>("Topten", ViewModel.ToptenItems);
         }
 
         // Code to execute if a navigation fails

@@ -55,6 +55,12 @@ namespace CustomControls
             }
         }
 
+        public void Refresh()
+        {
+            ItemsSource = DataContext as CollectionType;
+            history.Clear();
+        }
+
         public RecursiveListBox()
         {
             DefaultStyleKey = typeof(RecursiveListBox);

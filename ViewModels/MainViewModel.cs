@@ -117,9 +117,6 @@ namespace sbbs_client_wp7
             }
             set
             {
-                // 启动所有登录钩子
-                LoginChanged(this, value);
-
                 // 注销时清除Token
                 if (value == false)
                 {
@@ -128,6 +125,9 @@ namespace sbbs_client_wp7
                 }
 
                 NotifyPropertyChanged("IsLogin");
+
+                // 启动所有登录钩子
+                LoginChanged(this, value);
             }
         }
         // 是否正在登录中

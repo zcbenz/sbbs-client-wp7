@@ -47,10 +47,7 @@ namespace sbbs_client_wp7
             {
                 isFirstLoading = false;
 
-                // 先从缓存中载入
-                App.ViewModel.FavoratesItems = LocalCache.Get<ObservableCollection<BoardViewModel>>("Favorates");
-
-                // 延迟两秒后开始刷新
+                // 延迟两秒后开始刷新全部
                 DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(2) };
                 timer.Tick += delegate(object s, EventArgs arg)
                 {
@@ -162,6 +159,7 @@ namespace sbbs_client_wp7
         // 载入收藏夹
         private void LoadFavorates()
         {
+            MessageBox.Show("IsLogin: " + App.ViewModel.IsLogin);
             // 登录时载入收藏夹，未登陆时清空
             if (App.ViewModel.IsLogin)
             {
@@ -179,7 +177,7 @@ namespace sbbs_client_wp7
             {
                 App.ViewModel.IsFavoratesLoaded = true;
                 LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", null);
-                App.ViewModel.FavoratesItems.Clear();
+                App.ViewModel.FavoratesItems = null;
             }
         }
 
@@ -193,6 +191,7 @@ namespace sbbs_client_wp7
                     return;
 
                 // 刷新十大
+                LocalCache.Set<ObservableCollection<TopicViewModel>>("Topten", topics);
                 App.ViewModel.ToptenItems = topics;
             });
         }
