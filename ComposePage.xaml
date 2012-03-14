@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="sbbs_client_wp7.PostPage"
+    x:Class="sbbs_client_wp7.ComposePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -15,7 +15,7 @@
     toolkit:TiltEffect.IsTiltEnabled="True"
     shell:SystemTray.Opacity="{Binding IsLoading, Converter={StaticResource LoadedOpacityConerter}, ConverterParameter=true}"
     shell:SystemTray.IsVisible="True">
-    
+
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator Text="发布中..."
             IsVisible="{Binding IsLoading}"
@@ -51,8 +51,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="Board" Text="版面" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="TypeTitle" Text="发帖" Margin="9,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+            <TextBlock Text="虎踞龙蟠BBS" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="写站内信" Margin="9,-7,0,0" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -62,20 +62,23 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="标题" Style="{StaticResource PhoneTextSubtleStyle}" />
-                <TextBox x:Name="TitleText" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="1" />
-                <TextBlock Text="内容" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}" />
-                <TextBox x:Name="ContentText" TextWrapping="Wrap" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="3" />
+                <TextBlock Text="收信人" Style="{StaticResource PhoneTextSubtleStyle}" />
+                <TextBox x:Name="UserText" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="1" />
+                <TextBlock Text="标题" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Row="2" />
+                <TextBox x:Name="TitleText" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="3" />
+                <TextBlock Text="内容" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Row="4" />
+                <TextBox x:Name="ContentText" TextWrapping="Wrap" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="5" />
             </Grid>
         </ScrollViewer>
     </Grid>
- 
+
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton Click="Post_Click" IconUri="/Images/send.text.png" Text="发帖"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/attach.png" Text="附件"/>
+            <shell:ApplicationBarIconButton Click="Compose_Click" IconUri="/Images/sendmessage.png" Text="发送"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

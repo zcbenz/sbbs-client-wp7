@@ -48,6 +48,8 @@ namespace sbbs_client_wp7
 
         private void Reply_Click(object sender, EventArgs e)
         {
+            this.NavigationService.Navigate(new Uri("/ComposePage.xaml?reid=" + App.ViewModel.Mail.Id + "&title=" + HttpUtility.UrlEncode(App.ViewModel.Mail.Title)
+                + "&user=" + App.ViewModel.Mail.Author, UriKind.Relative));
         }
     }
 }

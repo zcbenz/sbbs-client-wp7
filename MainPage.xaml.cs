@@ -47,6 +47,9 @@ namespace sbbs_client_wp7
             {
                 isFirstLoading = false;
 
+                // 先从缓存中载入
+                App.ViewModel.FavoratesItems = LocalCache.Get<ObservableCollection<BoardViewModel>>("Favorates");
+
                 // 延迟两秒后开始刷新
                 DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(2) };
                 timer.Tick += delegate(object s, EventArgs arg)
@@ -168,13 +171,15 @@ namespace sbbs_client_wp7
                     if (error != null)
                         return;
 
+                    LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", boards);
                     App.ViewModel.FavoratesItems = boards;
                 });
             }
             else
             {
                 App.ViewModel.IsFavoratesLoaded = true;
-                App.ViewModel.FavoratesItems = null;
+                LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", null);
+                App.ViewModel.FavoratesItems.Clear();
             }
         }
 

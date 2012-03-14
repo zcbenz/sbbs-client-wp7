@@ -4,21 +4,24 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
-using System.Collections.ObjectModel;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.Windows.Navigation;
 
 namespace sbbs_client_wp7
 {
     using Sbbs;
 
-    public partial class PostPage : PhoneApplicationPage
+    public partial class ComposePage : PhoneApplicationPage
     {
-        private string board;
         private int reid = 0;
         private LoadingViewModel viewModel = new LoadingViewModel();
 
-        public PostPage()
+        public ComposePage()
         {
             InitializeComponent();
 
@@ -29,7 +32,7 @@ namespace sbbs_client_wp7
         {
             base.OnNavigatedTo(e);
 
-            if (this.NavigationContext.QueryString.ContainsKey("reid"))
+            if (this.NavigationContext.QueryString.ContainsKey("user"))
             {
                 string title = this.NavigationContext.QueryString["title"];
                 if (title.Length > 3 && title.Substring(0, 3) == "Re:")
@@ -37,27 +40,23 @@ namespace sbbs_client_wp7
                 else
                     TitleText.Text = "Re: " + title;
 
-                TypeTitle.Text = "回复";
-                Board.Text = board = this.NavigationContext.QueryString["board"];
+                UserText.Text = this.NavigationContext.QueryString["user"];
                 reid = int.Parse(this.NavigationContext.QueryString["reid"]);
 
                 ContentText.Focus();
             }
             else
             {
-                TypeTitle.Text = "发帖";
-                Board.Text = board = this.NavigationContext.QueryString["board"];
-
-                TitleText.Focus();
+                UserText.Focus();
             }
         }
 
-        private void Post_Click(object sender, EventArgs e)
+        private void Compose_Click(object sender, EventArgs e)
         {
             if (viewModel.IsLoading) return;
             viewModel.IsLoading = true;
 
-            App.Service.TopicPost(board, reid, TitleText.Text, ContentText.Text, delegate(TopicViewModel topic, bool success, string error)
+            App.Service.MailSend(UserText.Text, TitleText.Text, ContentText.Text, delegate(TopicViewModel mail, bool success, string error)
             {
                 viewModel.IsLoading = false;
 
@@ -66,16 +65,7 @@ namespace sbbs_client_wp7
                 else if (error != null)
                     MessageBox.Show(error);
                 else
-                {
-                    // 跳转到版面时标记刷新
-                    if (reid == 0)
-                        App.ViewModel.CurrentBoard.NeedRefresh = true;
-                    // 跳转到话题时直接在最后添加
-                    else
-                        App.ViewModel.CurrentTopic.Topics.Add(topic);
-
                     NavigationService.GoBack();
-                }
             });
         }
     }

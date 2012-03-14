@@ -21,6 +21,11 @@
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="MailDataTemplate">
             <Grid Margin="0 0 0 10">
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu>
+                        <toolkit:MenuItem Header="删除" Click="Delete_Click"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
                 <Rectangle Fill="{StaticResource PhoneAccentBrush}" Width="8" HorizontalAlignment="Left"/>
                 <StackPanel Orientation="Vertical" Margin="4 0 0 0">
                     <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Foreground="{Binding Unread, Converter={StaticResource BoolAccentConverter}}" TextWrapping="Wrap" Text="{Binding Title}"/>
@@ -93,7 +98,7 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/new.png" Text="新建"/>
+            <shell:ApplicationBarIconButton Click="New_Click" IconUri="/Images/new.png" Text="新建"/>
             <shell:ApplicationBarIconButton Click="Refresh_Click" IconUri="/Images/refresh.png" Text="刷新"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

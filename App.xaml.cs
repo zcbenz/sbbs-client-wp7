@@ -93,7 +93,6 @@ namespace sbbs_client_wp7
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             // 载入上一次的数据状态
-            ViewModel.FavoratesItems = LocalCache.Get<ObservableCollection<BoardViewModel>>("Favorates");
             ViewModel.ToptenItems = LocalCache.Get<ObservableCollection<TopicViewModel>>("Topten");
         }
 
@@ -107,7 +106,6 @@ namespace sbbs_client_wp7
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", ViewModel.FavoratesItems);
             LocalCache.Set<ObservableCollection<TopicViewModel>>("Topten", ViewModel.ToptenItems);
         }
 
@@ -115,7 +113,6 @@ namespace sbbs_client_wp7
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            LocalCache.Set<ObservableCollection<BoardViewModel>>("Favorates", ViewModel.FavoratesItems);
             LocalCache.Set<ObservableCollection<TopicViewModel>>("Topten", ViewModel.ToptenItems);
         }
 

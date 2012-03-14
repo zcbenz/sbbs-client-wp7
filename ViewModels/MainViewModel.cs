@@ -122,7 +122,10 @@ namespace sbbs_client_wp7
 
                 // 注销时清除Token
                 if (value == false)
+                {
+                    LocalCache.Set<string>("Token", null);
                     App.Service.Token = null;
+                }
 
                 NotifyPropertyChanged("IsLogin");
             }

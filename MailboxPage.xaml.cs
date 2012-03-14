@@ -157,6 +157,52 @@ namespace sbbs_client_wp7
             LoadMailbox(MailboxPivot.SelectedIndex);
         }
 
+        private void New_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/ComposePage.xaml", UriKind.Relative));
+        }
+
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            TopicViewModel mail = (sender as MenuItem).DataContext as TopicViewModel;
+            int type = MailboxPivot.SelectedIndex;
+
+            // 从服务器中删除
+            App.Service.MailDelete(type, mail.Id, delegate(int result, bool success, string error)
+            {
+            });
+
+            switch (type)
+            {
+                case 0:
+                    // 在其之后的邮件id全部减1
+                    foreach (TopicViewModel m in App.ViewModel.Mailbox.InboxItems)
+                    {
+                        if (m == mail) break;
+                        m.Id--;
+                    }
+                    // 从ViewModel中删除
+                    App.ViewModel.Mailbox.InboxItems.Remove(mail);
+                    break;
+                case 1:
+                    foreach (TopicViewModel m in App.ViewModel.Mailbox.SentItems)
+                    {
+                        if (m == mail) break;
+                        m.Id--;
+                    }
+                    App.ViewModel.Mailbox.SentItems.Remove(mail);
+                    break;
+                case 2:
+                    foreach (TopicViewModel m in App.ViewModel.Mailbox.DeletedItems)
+                    {
+                        if (m == mail) break;
+                        m.Id--;
+                    }
+                    App.ViewModel.Mailbox.DeletedItems.Remove(mail);
+                    break;
+            }
+        }
+
         // 载入下一页
         private void BoxList_NextPage(object sendor, NextPageEventArgs e)
         {

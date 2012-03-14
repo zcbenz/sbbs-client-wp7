@@ -38,13 +38,9 @@ namespace sbbs_client_wp7
                     this.NavigationService.GoBack();
                 }
                 else if (!success)
-                {
-                    MessageBox.Show("用户名密码错误");
-                }
-                else
-                {
                     MessageBox.Show("网络错误");
-                }
+                else
+                    MessageBox.Show("用户名密码错误");
             });
         }
     }

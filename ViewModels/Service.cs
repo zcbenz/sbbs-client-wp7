@@ -155,6 +155,32 @@ namespace Sbbs
             wc.DownloadStringAsync(uri, new ServiceArg<TopicViewModel>() { Callback = callback });
         }
 
+        // 写邮件
+        public void MailSend(string user, string title, string content, Action<TopicViewModel, bool, string> callback)
+        {
+            MailSend(user, title, content, 0, callback);
+        }
+
+        public void MailSend(string user, string title, string content, int reid, Action<TopicViewModel, bool, string> callback)
+        {
+            WebClient wc = new WebClient();
+            Uri uri = new Uri(apiBase + "mail/send" + apiPost + "?token=" + HttpUtility.UrlEncode(Token) + "&user=" + user + "&reid=" + reid
+                + "&title=" + HttpUtility.UrlEncode(title) + "&content=" + HttpUtility.UrlEncode(content));
+
+            wc.DownloadStringCompleted += DownloadedAndParse<TopicViewModel, MailResponse>;
+            wc.DownloadStringAsync(uri, new ServiceArg<TopicViewModel>() { Callback = callback });
+        }
+
+        // 删除邮件
+        public void MailDelete(int type, int id, Action<int, bool, string> callback)
+        {
+            WebClient wc = new WebClient();
+            Uri uri = new Uri(apiBase + "mail/delete" + apiPost + "?token=" + HttpUtility.UrlEncode(Token) + "&type=" + type + "&id=" + id);
+
+            wc.DownloadStringCompleted += DownloadedAndParse<int, ResultResponse>;
+            wc.DownloadStringAsync(uri, new ServiceArg<int>() { Callback = callback });
+        }
+
         // 下载完成后分析JSON数据然后调用回调函数
         // C为返回类型，比如TopicCollection
         // R为JSON的Response类型

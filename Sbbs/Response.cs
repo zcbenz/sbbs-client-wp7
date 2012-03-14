@@ -150,4 +150,20 @@ namespace Sbbs
             }
         }
     }
+
+    // 返回int结果
+    [DataContract]
+    public class ResultResponse : Response, IResponse<int>
+    {
+        [DataMember(Name = "result")]
+        public int result;
+
+        public int Root
+        {
+            get
+            {
+                return result;
+            }
+        }
+    }
 }
