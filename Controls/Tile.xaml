@@ -9,7 +9,7 @@
     d:DesignHeight="160" d:DesignWidth="160">
 
     <Grid x:Name="LayoutRoot" Width="160" Height="160" Background="{StaticResource PhoneAccentBrush}">
-        <Image x:Name="TileImage" Width="100" Height="100"/>
+        <Image x:Name="TileImage" Width="75" Height="75"/>
         <TextBlock x:Name="TileTitle" Text="未设定"
                    Foreground="White" FontSize="20"
                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
