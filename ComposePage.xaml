@@ -71,7 +71,7 @@
                 <TextBlock Text="标题" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Row="2" />
                 <TextBox x:Name="TitleText" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="3" />
                 <TextBlock Text="内容" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Row="4" />
-                <TextBox x:Name="ContentText" TextWrapping="Wrap" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="5" />
+                <TextBox x:Name="ContentText" AcceptsReturn="True" TextWrapping="Wrap" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolReverseConverter}}" Grid.Row="5" />
             </Grid>
         </ScrollViewer>
     </Grid>
